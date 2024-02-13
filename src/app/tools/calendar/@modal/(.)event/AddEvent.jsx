@@ -21,44 +21,6 @@ import RepeatOptions from "./components/RepeatOptions";
 import SelectMenu from "./components/SelectMenu";
 import SelectEventAttendees from "./components/SelectEventAttendees";
 
-const team = [
-  {
-    name: "Tom Cook",
-    email: "tom.cook@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Whitney Francis",
-    email: "whitney.francis@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Leonard Krasner",
-    email: "leonard.krasner@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Floyd Miles",
-    email: "floyd.miles@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Emily Selman",
-    email: "emily.selman@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
-
 const repeatOptions = [
   { name: "No repetir", value: 1, label: "" },
   { name: "Diario", value: 2, label: "día" },
@@ -229,15 +191,15 @@ export default function AddEvent() {
                 <div className="h-0.5 w-6 mt-6 bg-gray-200 hidden sm:block" />
                 <div>
                   <label
-                    htmlFor="timestart"
+                    htmlFor="timeend"
                     className="block text-xs font-light leading-6 text-gray-900"
                   >
                     Fecha y hora de finalización del evento
                   </label>
                   <input
                     type={allDay ? "date" : "datetime-local"}
-                    name="email"
-                    id="email"
+                    name="timeend"
+                    id="timeend"
                     className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -331,7 +293,7 @@ export default function AddEvent() {
                   value={repeatOption}
                   setValue={setRepeatOption}
                 />
-                <div className="flex gap-1 items-center">
+               {repeatOption.value !== 1 && ( <div className="flex gap-1 items-center">
                   <p className="text-sm text-gray-800">Cada</p>
                   <Dropdown
                     elements={repeatValues}
@@ -340,9 +302,9 @@ export default function AddEvent() {
                     width={"w-16"}
                   />
                   <p className="text-sm text-gray-800">{repeatOption.label}</p>
-                </div>
+                </div>)}
               </div>
-              <RepeatOptions />
+              <RepeatOptions frequency={repeatOption} />
             </div>
           </div>
 
@@ -412,20 +374,21 @@ export default function AddEvent() {
       </div>
 
       {/* Action buttons */}
-      <div className="flex flex-shrink-0 justify-end px-4 py-4">
+      <div className="flex flex-shrink-0 justify-start px-4 py-4">
+      <button
+          type="submit"
+          className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+        >
+          Guardar
+        </button>
         <button
           type="button"
-          className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
+          className="ml-4 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
           onClick={() => setOpen(false)}
         >
-          Cancel
+          Cancelar
         </button>
-        <button
-          type="submit"
-          className="ml-4 inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-        >
-          Save
-        </button>
+       
       </div>
     </form>
   );

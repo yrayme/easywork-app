@@ -1,7 +1,6 @@
 import React from "react";
 import CreateContactButton from "./CreateContactButton";
 import { Cog8ToothIcon } from "@heroicons/react/20/solid";
-import ViewsOptions from "@/app/tools/calendar/components/ViewsOptions";
 import ContactSubMenu from "./ContactSubMenu";
 
 export default function ContactsHeader() {

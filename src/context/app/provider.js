@@ -1,13 +1,14 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import { AppContext } from "..";
-import { calendarViews, driveViews } from "@/lib/common";
+import { calendarViews, contactDetailTabs, driveViews } from "@/lib/common";
 
 export default function AppContextProvider({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [calendarView, setCalendarView] = useState(calendarViews[0]);
   const [driveView, setDriveView] = useState(driveViews[0]);
   const [openModal, setOpenModal] = useState(false);
+  const [contactDetailTab, setContactDetailTab] = useState(contactDetailTabs[0]);
 
   const values = useMemo(
     () => ({
@@ -19,8 +20,10 @@ export default function AppContextProvider({ children }) {
       setDriveView,
       openModal,
       setOpenModal,
+      contactDetailTab,
+      setContactDetailTab,
     }),
-    [sidebarOpen, calendarView, driveView, openModal]
+    [sidebarOpen, calendarView, driveView, openModal, contactDetailTab]
   );
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

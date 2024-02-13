@@ -8,92 +8,59 @@ import { FaWhatsapp } from "react-icons/fa6";
 import clsx from "clsx";
 import Image from "next/image";
 import React, { useLayoutEffect, useRef, useState } from "react";
-const contacts = [
-  {
-    id: 1,
-    name: "Luis González",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA",
-    birthdate: "05 de Febrero",
-    responsable: {
-      name: "Rosmer Campos",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    email: "luisgonzalez@gmail.com",
-    phone: "+52 1 55 1234 5678",
-    created: "26/01/2024",
-    source: "Facebook",
-  },
-  {
-    id: 2,
-    name: "Laura Pérez",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA",
-    birthdate: "28 de Enero",
-    responsable: {
-      name: "Rosmer Campos",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    email: "laurap@gmail.com",
-    phone: "+52 1 56 2345 5678",
-    created: "26/01/2024",
-    source: "Facebook",
-  },
-  {
-    id: 3,
-    name: "Gerardo Blanco",
-    image:
-      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA",
-    birthdate: "30 de Mayo",
-    responsable: {
-      name: "Rosmer Campos",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    email: "gerardoblanco@gmail.com",
-    phone: "+52 3 14 6345 5678",
-    created: "26/01/2024",
-    source: "Facebook",
-  },
-  {
-    id: 4,
-    name: "Cristina Lanz",
-    image:
-      "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA",
-    birthdate: "12 de Diciembre",
-    responsable: {
-      name: "Rosmer Campos",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&h=256&auto=format&fit=facearea&facepad=2&ixlib=rb-1.2.1&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    email: "cristinalanz@gmail.com",
-    phone: "+52 1 67 1234 5678",
-    created: "26/01/2024",
-    source: "Facebook",
-  },
-  // More contacts...
-];
+import useCrmContext from "@/context/crm";
+import Link from "next/link";
+import { getURLContactPhoto } from "@/lib/common";
+
 
 export default function Page() {
   const checkbox = useRef();
   const [checked, setChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState([]);
+  const {contacts: AppContacts} = useCrmContext();
+
 
   useLayoutEffect(() => {
-    const isIndeterminate =
-      selectedContacts.length > 0 && selectedContacts.length < contacts.length;
-    setChecked(selectedContacts.length === contacts.length);
+    if (checkbox.current){
+      const isIndeterminate =
+      selectedContacts.length > 0 && selectedContacts.length < AppContacts.length;
+    setChecked(selectedContacts.length === AppContacts.length);
     setIndeterminate(isIndeterminate);
     checkbox.current.indeterminate = isIndeterminate;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedContacts]);
 
   function toggleAll() {
-    setSelectedContacts(checked || indeterminate ? [] : contacts);
+    setSelectedContacts(checked || indeterminate ? [] : AppContacts);
     setChecked(!checked && !indeterminate);
     setIndeterminate(false);
+  }
+
+  if (AppContacts && AppContacts.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="flex flex-col items-center space-y-3">
+          <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+            <svg
+              className="w-10 h-10 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              ></path>
+            </svg>
+          </div>
+          <p className="text-lg font-medium text-gray-900">No hay contactos</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -180,7 +147,7 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {contacts.map((contact) => (
+                {AppContacts.map((contact) => (
                   <tr
                     key={contact.id}
                     className={clsx(
@@ -219,34 +186,34 @@ export default function Page() {
                       <div className="flex items-center">
                         <div className="h-9 w-9 flex-shrink-0">
                           <Image
-                            className="h-9 w-9 rounded-full"
+                            className="h-9 w-9 rounded-full bg-zinc-200"
                             width={36}
                             height={36}
-                            src={contact.image}
+                            src={getURLContactPhoto(contact) ?? "/img/avatar.svg"}
                             alt=""
                           />
                         </div>
                         <div className="ml-4">
                           <div className="font-medium text-gray-900">
-                            {contact.name}
+                            <Link href={`/sales/crm/contacts/contact/${contact.id}`}>{contact.nombre} {contact.apellidos}</Link>
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 bg-indigo-100/30">
-                      {contact.birthdate}
+                      {contact.birthday ?? "05/02/1991"}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {contact.responsable.name}
+                      {contact?.responsibleUser?.name ?? "N/A"}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {contact.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {contact.phone}
+                      {contact.telefono}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {contact.created}
+                      {new Date(contact.createdAt).toLocaleDateString() ?? "05/02/1991"}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {contact.source}

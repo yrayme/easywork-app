@@ -1,6 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AppContextProvider from "@/context/app/provider";
+import CrmContextProvider from "@/context/crm/provider";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,10 +13,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
-    <html lang="es" className="h-full">
+    <html lang="es" className="h-full light">
       <body className={inter.className}>
-        <AppContextProvider>{children}</AppContextProvider>
+        <AppContextProvider>
+          <CrmContextProvider>{children}</CrmContextProvider>
+          <ToastContainer />
+        </AppContextProvider>
       </body>
     </html>
   );

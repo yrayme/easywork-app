@@ -15,7 +15,7 @@ export default function Toolbox() {
         <li className="col-span-1 rounded-lg bg-white text-center shadow relative">
           <Link
             className="relative h-full w-full overflow-hidden rounded-lg"
-            href="/drive"
+            href="/tools/drive"
           >
             <Image
               width={200}
@@ -29,7 +29,7 @@ export default function Toolbox() {
         <li className="col-span-1 rounded-lg bg-white text-center shadow relative">
           <Link
             className="relative h-full w-full overflow-hidden rounded-lg"
-            href="/task"
+            href="/tools/tasks"
           >
             <Image
               width={200}
@@ -43,12 +43,12 @@ export default function Toolbox() {
         <li className="col-span-1 rounded-lg bg-white text-center shadow relative">
           <Link
             className="relative h-full w-full overflow-hidden rounded-lg"
-            href="calendar"
+            href="/tools/calendar"
           >
             <Image
               width={200}
               height={200}
-              src={"/img/herramientas/calendario.png"}
+              src={"/img/herramientas/calendario.webp"}
               alt={"Calendar"}
               className="h-full w-full object-cover object-center"
             />
@@ -57,7 +57,7 @@ export default function Toolbox() {
         <li className="col-span-1 rounded-lg bg-white text-center shadow relative">
           <Link
             className="relative h-full w-full overflow-hidden rounded-lg"
-            href="/webmail"
+            href="/tools/webmail"
           >
             <Image
               width={200}

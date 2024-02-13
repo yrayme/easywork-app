@@ -1,27 +1,14 @@
 "use client";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useRouter } from "next/navigation";
-import { onDismissModal } from "@/lib/common";
 import useAppContext from "@/context/app";
 
 export default function SlideOver({ children }) {
   const { openModal, setOpenModal } = useAppContext();
-  const router = useRouter();
-  console.log("openModal", openModal);
-  useEffect(() => {
-    // Verifica si la página se ha cargado (se ejecuta solo en el montaje)
-    setOpenModal(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function onDismiss() {
-    onDismissModal(router, setOpenModal);
-  }
 
   return (
     <Transition.Root show={openModal} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={onDismiss}>
+      <Dialog as="div" className="relative z-10" onClose={setOpenModal}>
         <div className="fixed inset-0" />
 
         <div className="fixed inset-0 overflow-hidden">

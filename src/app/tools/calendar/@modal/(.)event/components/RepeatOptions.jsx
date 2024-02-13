@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function RepeatOptions({ visible }) {
+export default function RepeatOptions({ visible, frequency }) {
+  if (frequency.value === 1) return <></>
   return (
     <div className="flex items-center gap-10">
       <p className="text-sm text-gray-800">Final</p>

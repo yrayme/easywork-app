@@ -1,18 +1,7 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
-  Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Cog6ToothIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import useAppContext from "@/context/app";
@@ -87,7 +76,7 @@ export default function Sidebar() {
                   </div>
                 </Transition.Child>
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-primary px-6 pb-4 ring-1 ring-white/10">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-easy-500 px-6 pb-4 ring-1 ring-white/10">
                   <div className="flex h-16 shrink-0 items-center">
                     <Image
                       width={32}
@@ -223,7 +212,7 @@ export default function Sidebar() {
       </Transition.Root>
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-primary px-6 pb-4">
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-easy-700 px-6 pb-4">
           <div className="flex h-16 shrink-0 items-center mx-auto mt-2">
             <Link href="/">
               <Image
@@ -246,8 +235,8 @@ export default function Sidebar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-primary/85 text-white"
-                              : "text-slate-50 hover:text-white hover:bg-gray-800",
+                              ? "bg-easy-500 text-white"
+                              : "text-slate-50 hover:text-white hover:bg-easy-800",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
@@ -264,8 +253,8 @@ export default function Sidebar() {
                               <Disclosure.Button
                                 className={classNames(
                                   item.current
-                                    ? "bg-indigo-800 text-white"
-                                    : "text-slate-50 hover:text-white hover:bg-indigo-800",
+                                    ? "bg-easy-500 text-white"
+                                    : "text-slate-50 hover:text-white hover:bg-easy-600",
                                   "flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 font-semibold"
                                 )}
                               >
@@ -292,8 +281,8 @@ export default function Sidebar() {
                                         href={subItem.href}
                                         className={classNames(
                                           subItem.current
-                                            ? "bg-indigo-800 text-white"
-                                            : "text-slate-50 hover:text-white hover:bg-indigo-800",
+                                            ? "bg-easy-600 text-white"
+                                            : "text-slate-50 hover:text-white hover:bg-easy-600",
                                           "block rounded-md py-2 pr-2 pl-9 text-sm leading-6"
                                         )}
                                       >
@@ -306,8 +295,8 @@ export default function Sidebar() {
                                             <Disclosure.Button
                                               className={classNames(
                                                 subItem.current
-                                                  ? "bg-indigo-800 text-white"
-                                                  : "text-slate-50 hover:text-white hover:bg-indigo-800",
+                                                  ? "bg-easy-600 text-white"
+                                                  : "text-slate-50 hover:text-white hover:bg-easy-600",
                                                 "flex items-center w-full text-left rounded-md p-2  pl-9 gap-x-3 text-sm leading-6 font-semibold"
                                               )}
                                             >
@@ -333,8 +322,8 @@ export default function Sidebar() {
                                                       href={subSubItem.href}
                                                       className={classNames(
                                                         subItem.current
-                                                          ? "bg-indigo-800 text-white"
-                                                          : "text-slate-50 hover:text-white hover:bg-indigo-800",
+                                                          ? "bg-easy-600 text-white"
+                                                          : "text-slate-50 hover:text-white hover:bg-easy-600",
                                                         "block rounded-md py-2 pr-2 pl-9 text-sm leading-6"
                                                       )}
                                                     >

@@ -20,6 +20,14 @@ export const contactSubmenuOptions = [
   "marcar todo como leido",
 ];
 
+export const contactDetailTabs = [
+  "general",
+  "polizas",
+  "actividades",
+  "reportes",
+  "documentos",
+]
+
 export const driveViews = ["table", "icon", "thumb"];
 export const driveMimeTypes = [
   "image",
@@ -123,10 +131,27 @@ export const sidebarNavigation = [
   },
 ];
 
-export function onDismissModal(router, setOpenModal, duration = 500) {
+export function onDismissModal(setOpenModal) {
   setOpenModal(false);
-  console.log("Duration: ", duration);
-  setTimeout(() => {
-    router.back();
-  }, duration);
+}
+
+
+export function getURLContactPhoto(objeto) {
+  // Verificar si el objeto tiene la propiedad 'ContactsFiles'
+  if (objeto && objeto.ContactsFiles && Array.isArray(objeto.ContactsFiles)) {
+    // Iterar sobre los elementos en 'ContactsFiles'
+    for (const file of objeto.ContactsFiles) {
+      // Verificar si el campo es 'photoContact'
+      if (file.FieldsFilesContact && file.FieldsFilesContact.name === 'photoContact') {
+        // Devolver la URL de la foto
+        return file.url;
+      }
+    }
+  }
+
+  console.log('No se encontró la URL de la foto');
+  console.log('objeto', objeto);
+
+  // Devolver null si no se encuentra la URL de la foto
+  return null;
 }

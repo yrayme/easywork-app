@@ -1,10 +1,11 @@
 import SlideOver from "@/components/SlideOver";
 import React from "react";
+import CreateContact from "./CreateContact";
 
-export default function Page() {
+export default function CreateContactModal() {
   return (
     <SlideOver>
-      <p>Crear Contacto</p>
+      <CreateContact />
     </SlideOver>
   );
 }
