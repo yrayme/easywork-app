@@ -1,10 +1,8 @@
 "use client";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import useAppContext from "@/context/app";
 
-export default function SlideOver({ children }) {
-  const { openModal, setOpenModal } = useAppContext();
+export default function SlideOver({ openModal, setOpenModal, children }) {
 
   return (
     <Transition.Root show={openModal} as={Fragment}>

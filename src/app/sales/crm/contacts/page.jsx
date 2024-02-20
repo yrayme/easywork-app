@@ -1,10 +1,19 @@
+"use client";
+import useCrmContext from "@/context/crm";
 import { getContacts } from "@/lib/api";
-import React from "react";
-import BindContacts from "./components/BindContacts";
+import React, { useEffect } from "react";
 
-export default async function Page() {
-  const contacts = await getContacts();
+export default function Page() {
+  const { setContacts, lastContactsUpdate } = useCrmContext();
 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await getContacts();
+      setContacts(response);
+    }
 
-  return <BindContacts contacts={contacts}/>
+    fetchData();
+  }, [lastContactsUpdate]);
+
+  return <></>;
 }

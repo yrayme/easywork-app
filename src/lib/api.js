@@ -75,13 +75,22 @@ export async function createContact(prevState, formData) {
 }
 
 export async function getContact(id) {
-  const data = await fetchAPI(`/crm/contact/${id}`, "contact");
-  return data;
+  try {
+    const data = await fetchAPI(`/crm/contact/${id}`, "contact");
+    return data;  
+  } catch (error) {
+    return null;
+  }
+  
 }
 
 // POLIZAS
 
-export async function subirPolizaGNP(formData) {}
+export async function subirPolizaPDF(prevState, formData) {
+  const result = await fetchAPI("/crm/poliza/pdf", "subirPolizaPDF", "POST", formData, {});
+  revalidateTag("contact");
+  return result;
+}
 
 // TASKS
 

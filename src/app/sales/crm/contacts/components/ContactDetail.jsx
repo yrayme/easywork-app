@@ -1,28 +1,10 @@
 "use client";
 import React from "react";
-import ProfileImageInput from "./create_contact/ProfileImageInput";
-import TextInput from "./create_contact/TextInputLocal";
 import AddContactTabs from "./create_contact/AddContactTabs";
-import SelectInput from "./create_contact/SelectInput";
-import TextareaLabel from "./TextareaLabel";
-import {
-  PencilSquareIcon,
-  UserIcon,
-  VideoCameraIcon,
-} from "@heroicons/react/20/solid";
-import clsx from "clsx";
-import ContactActivityPanel from "./ContactActivityPanel";
-import ActivityHeader from "./ActivityHeader";
-import CardTask from "./CardTask";
+import useCrmContext from "@/context/crm";
 
-const sexoOptions = [
-  { id: 1, name: "Masculino" },
-  { id: 2, name: "Femenino" },
-  { id: 3, name: "Otro" },
-];
-
-
-export default function ContactDetail({ contactInfo, children }) {
+export default function ContactDetail({ children }) {
+  const { currentContact } = useCrmContext();
   const [editMode, setEditMode] = React.useState(false);
 
   return (
@@ -35,7 +17,7 @@ export default function ContactDetail({ contactInfo, children }) {
         <div className="bg-transparent py-6 mx-4">
           <div className="flex items-start flex-col justify-between space-y-3">
             <h1 className="text-2xl">
-              {contactInfo.nombre} {contactInfo.apellidos}
+              {currentContact.nombre} {currentContact.apellidos}
             </h1>
             <AddContactTabs />
             {/* <AddContactTabs /> */}

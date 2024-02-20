@@ -8,7 +8,11 @@ export default function AppContextProvider({ children }) {
   const [calendarView, setCalendarView] = useState(calendarViews[0]);
   const [driveView, setDriveView] = useState(driveViews[0]);
   const [openModal, setOpenModal] = useState(false);
-  const [contactDetailTab, setContactDetailTab] = useState(contactDetailTabs[0]);
+  const [contactDetailTab, setContactDetailTab] = useState(
+    contactDetailTabs[0]
+  );
+  const [showContact, setShowContact] = useState(false);
+  const [showPoliza, setShowPoliza] = useState(false);
 
   const values = useMemo(
     () => ({
@@ -22,8 +26,20 @@ export default function AppContextProvider({ children }) {
       setOpenModal,
       contactDetailTab,
       setContactDetailTab,
+      showContact,
+      setShowContact,
+      showPoliza,
+      setShowPoliza,
     }),
-    [sidebarOpen, calendarView, driveView, openModal, contactDetailTab]
+    [
+      sidebarOpen,
+      calendarView,
+      driveView,
+      openModal,
+      contactDetailTab,
+      showContact,
+      showPoliza,
+    ]
   );
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

@@ -85,9 +85,17 @@ const sexoOptions = [
   { id: 3, name: "Otro" },
 ];
 
+const filterOptions = (query, options) => {
+  return query === ""
+    ? options
+    : options.filter((option) =>
+        option.name.toLowerCase().includes(query.toLowerCase())
+      );
+};
+
 export default function CreateContact() {
   const { setOpenModal } = useAppContext();
-  const { crmUsers } = useCrmContext();
+  const { crmUsers, setLastContactsUpdate } = useCrmContext();
 
   const [query, setQuery] = useState("");
   const [querySource, setQuerySource] = useState("");
@@ -145,52 +153,34 @@ export default function CreateContact() {
         return;
       }
 
-      toast.success('¡Contacto creado!');
+      setLastContactsUpdate(Date.now());
+      toast.success("¡Contacto creado!");
       setOpenModal(false);
-
     } catch (error) {
+      toast.error("Error al crear el contacto!");
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredContactTypes =
-    query === ""
-      ? contactTypes
-      : contactTypes.filter((contactType) => {
-          return contactType.name.toLowerCase().includes(query.toLowerCase());
-        });
-
-  const filteredContactSources =
-    querySource === ""
-      ? contactSources
-      : contactSources.filter((contactSource) => {
-          return contactSource.name
-            .toLowerCase()
-            .includes(querySource.toLowerCase());
-        });
-
-  const filteredContactResponsible =
-    queryResponsible === ""
-      ? crmUsers
-      : crmUsers.filter((contactResponsible) => {
-          return contactResponsible.name
-            .toLowerCase()
-            .includes(queryResponsible.toLowerCase());
-        });
-
-  const filteredSexoOptions =
-    querySexo === ""
-      ? sexoOptions
-      : sexoOptions.filter((contactSexo) => {
-          return contactSexo.name
-            .toLowerCase()
-            .includes(querySexo.toLowerCase());
-        });
+  const filteredContactTypes = filterOptions(query, contactTypes);
+  const filteredContactSources = filterOptions(querySource, contactSources);
+  const filteredContactResponsible = filterOptions(queryResponsible, crmUsers);
+  const filteredSexoOptions = filterOptions(querySexo, sexoOptions);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen relative">
       {/* Formulario Principal */}
+      {loading && (
+        <div className="absolute z-50 inset-0 bg-easy-800/10 w-1/2 h-full">
+          {/* Loader spinner */}
+
+          <div className="flex items-center justify-center h-full flex-col gap-2 cursor-progress">
+            <div className="animate-spin rounded-full h-28 w-28 border-t-2 border-b-2 border-easy-600" />
+            <p className="text-easy-600 animate-pulse select-none">Guardando...</p>
+          </div>
+        </div>
+      )}
       <form
         onSubmit={handleFormSubmit}
         className="flex flex-col flex-1 bg-zinc-200 opacity-100 shadow-xl text-zinc-800 overflow-hidden"

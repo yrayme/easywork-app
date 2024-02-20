@@ -9,27 +9,27 @@ import clsx from "clsx";
 import Image from "next/image";
 import React, { useLayoutEffect, useRef, useState } from "react";
 import useCrmContext from "@/context/crm";
-import Link from "next/link";
 import { getURLContactPhoto } from "@/lib/common";
-
+import useAppContext from "@/context/app";
 
 export default function Page() {
   const checkbox = useRef();
   const [checked, setChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState([]);
-  const {contacts: AppContacts} = useCrmContext();
-
+  const { setShowContact } = useAppContext();
+  const { contacts: AppContacts, setCurrentContactID } = useCrmContext();
 
   useLayoutEffect(() => {
-    if (checkbox.current){
+    if (checkbox.current) {
       const isIndeterminate =
-      selectedContacts.length > 0 && selectedContacts.length < AppContacts.length;
-    setChecked(selectedContacts.length === AppContacts.length);
-    setIndeterminate(isIndeterminate);
-    checkbox.current.indeterminate = isIndeterminate;
+        selectedContacts.length > 0 &&
+        selectedContacts.length < AppContacts.length;
+      setChecked(selectedContacts.length === AppContacts.length);
+      setIndeterminate(isIndeterminate);
+      checkbox.current.indeterminate = isIndeterminate;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedContacts]);
 
   function toggleAll() {
@@ -189,13 +189,23 @@ export default function Page() {
                             className="h-9 w-9 rounded-full bg-zinc-200"
                             width={36}
                             height={36}
-                            src={getURLContactPhoto(contact) ?? "/img/avatar.svg"}
+                            src={
+                              getURLContactPhoto(contact) ?? "/img/avatar.svg"
+                            }
                             alt=""
                           />
                         </div>
                         <div className="ml-4">
                           <div className="font-medium text-gray-900">
-                            <Link href={`/sales/crm/contacts/contact/${contact.id}`}>{contact.nombre} {contact.apellidos}</Link>
+                            <button
+                              onClick={() => {
+                                setCurrentContactID(contact.id);
+                                console.log(contact.id);
+                                setShowContact(true);
+                              }}
+                            >
+                              {contact.nombre} {contact.apellidos}
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -213,7 +223,8 @@ export default function Page() {
                       {contact.telefono}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {new Date(contact.createdAt).toLocaleDateString() ?? "05/02/1991"}
+                      {new Date(contact.createdAt).toLocaleDateString() ??
+                        "05/02/1991"}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {contact.source}

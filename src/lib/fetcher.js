@@ -19,8 +19,6 @@ export default async function fetchAPI(
   if (method === "POST" && data) {
     // Si el cuerpo es un FormData, no es necesario convertirlo a JSON
 
-    console.log(data);
-    console.log(data instanceof FormData);
     if (data instanceof FormData) {
       requestOptions.body = data;
     } else {
@@ -29,7 +27,6 @@ export default async function fetchAPI(
   }
   try {
     const res = await fetch(API_URL + endpoint, requestOptions);
-    console.log(API_URL + endpoint);
 
     const json = await res.json();
 
