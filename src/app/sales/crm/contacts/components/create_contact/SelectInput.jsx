@@ -2,8 +2,9 @@
 "use client";
 import { Combobox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { TextInput } from "@tremor/react";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect } from "react";
 
 function SelectInput({
   id,
@@ -12,8 +13,18 @@ function SelectInput({
   setSelectedOption,
   options,
   onChangeInput,
+  disabled = false,
   className,
 }) {
+
+  const [selected, setSelected] = React.useState(selectedOption);
+
+  useEffect(()=>{
+    if (selectedOption) {
+      setSelected(selectedOption)
+    }
+  
+  },  [selectedOption])
   return (
     <div className={clsx("col-span-full", className)}>
       <Combobox as="div" value={selectedOption} onChange={setSelectedOption}>
@@ -61,18 +72,31 @@ function SelectInput({
               ))}
             </Combobox.Options>
           )}
-          <Combobox.Input
-            className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            onChange={(event) => onChangeInput(event.target.value)}
-            displayValue={(selectedOption) => selectedOption?.name}
+          {!disabled && (
+            <Combobox.Input
+              disabled={disabled}
+              className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onChange={(event) => onChangeInput(event.target.value)}
+              displayValue={(selectedOption) => selectedOption?.name}
+            />
+          )}
+          <TextInput
+            type={disabled ? "text" : "hidden"}
+            value={(selected) => {
+              console.log(selected);
+              return selected?.name
+            }}
+            disabled={true}
           />
           <input type="hidden" name={id} id={id} value={selectedOption?.id} />
-          <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-            <ChevronUpDownIcon
-              className="h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            />
-          </Combobox.Button>
+          {!disabled && (
+            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+              <ChevronUpDownIcon
+                className="h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </Combobox.Button>
+          )}
         </div>
       </Combobox>
     </div>

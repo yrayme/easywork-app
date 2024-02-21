@@ -131,6 +131,19 @@ export const sidebarNavigation = [
   },
 ];
 
+export const contactTypes = [
+  { id: 1, name: "Agente" },
+  { id: 2, name: "Amigo" },
+  { id: 3, name: "Cliente Asegurado" },
+  { id: 4, name: "Cliente Contratado" },
+  { id: 5, name: "Conocido - Referido" },
+  { id: 6, name: "Familiar de asegurado" },
+  { id: 7, name: "Familiar de un amigo" },
+  { id: 8, name: "Familiar de un conocido" },
+  { id: 9, name: "Familiar directo" },
+  { id: 10, name: "Otro" },
+];
+
 export function onDismissModal(setOpenModal) {
   setOpenModal(false);
 }

@@ -1,16 +1,84 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import AddContactTabs from "./create_contact/AddContactTabs";
 import useCrmContext from "@/context/crm";
+import { updateContact } from "@/lib/api";
+import useAppContext from "@/context/app";
+import { useFormState } from "react-dom";
+import { toast } from "react-toastify";
+
+const compareValues = (fieldValue, originalValue) => {
+  if (fieldValue === "" || fieldValue === null) {
+    return "remove";
+  } else if (fieldValue === originalValue) {
+    return "unchanged";
+  } else {
+    return "changed";
+  }
+};
 
 export default function ContactDetail({ children }) {
-  const { currentContact } = useCrmContext();
-  const [editMode, setEditMode] = React.useState(false);
+  const { setShowContact } = useAppContext();
+  const {
+    currentContact,
+    contactEditMode,
+    setContactEditMode,
+    setLastContactsUpdate,
+  } = useCrmContext();
+
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  if (!currentContact) {
+    return <div>Sin contacto</div>;
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
+    setLoading(true);
+
+    const formData = new FormData(e.target);
+
+    const filteredFormData = new FormData();
+    for (const [field, value] of formData.entries()){
+      const comparisonResult = compareValues(value, currentContact[field]);
+      if (comparisonResult === "remove") {
+        filteredFormData.append(field, ""); // Enviar campo vacío para eliminar
+        filteredFormData.append(`${field}_remove`, true); // Enviar campo vacío para eliminar
+      } else if (comparisonResult === "changed") {
+        filteredFormData.append(field, value);
+        filteredFormData.append(`${field}_changed`, true);
+      } else {
+        filteredFormData.append(`${field}_original`, true);
+      }
+    }
+    try {
+      const result = await updateContact(currentContact, filteredFormData);
+
+      if (!result?.success) {
+        if (result?.errors) {
+          console.log(result.errors);
+          setErrors(result.errors);
+        }
+        return;
+      }
+
+      setLastContactsUpdate(Date.now());
+      toast.success("¡Contacto Actualizado!");
+      setShowContact(false);
+    } catch (error) {
+      toast.error("Error al crear el contacto!");
+    } finally {
+      setLoading(false);
+    }
+    console.log("Formulario enviado");
+  };
 
   return (
     <div className="flex flex-col h-screen">
       <form
-        action=""
+        onSubmit={handleFormSubmit}
         className="flex flex-col flex-1 bg-zinc-200 opacity-100 shadow-xl text-zinc-800 overflow-hidden rounded-tl-3xl"
       >
         {/* Encabezado del Formulario */}
@@ -27,7 +95,7 @@ export default function ContactDetail({ children }) {
         {/* Cuerpo del Formulario */}
         {children}
         {/* Botones de acción */}
-        {editMode && (
+        {contactEditMode && (
           <div className="flex justify-start px-4 py-4 sticky bottom-0 bg-zinc-200">
             <button
               type="submit"
@@ -37,6 +105,10 @@ export default function ContactDetail({ children }) {
             </button>
             <button
               type="button"
+              onClick={()=>{
+                setContactEditMode(false);
+                setShowContact(false);
+              }}
               className="ml-4 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
             >
               Cancelar

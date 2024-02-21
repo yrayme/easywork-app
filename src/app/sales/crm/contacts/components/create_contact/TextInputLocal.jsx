@@ -3,7 +3,7 @@ import { TextInput } from "@tremor/react";
 import clsx from "clsx";
 import React from "react";
 
-function TextInputLocal({ label, id, placeholder, value, type = "text", hidden = false, errors, required = false }) {
+function TextInputLocal({ label, id, placeholder, value, type = "text", hidden = false, errors, required = false, onChange, disabled=false }) {
   return (
     <div className={clsx("col-span-full", hidden && "hidden")}>
       <div>
@@ -20,6 +20,8 @@ function TextInputLocal({ label, id, placeholder, value, type = "text", hidden =
             id={id}
             value={value}
             required={required}
+            disabled={disabled}
+            onChange={onChange}
             placeholder={placeholder}
           />
 

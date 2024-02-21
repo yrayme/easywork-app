@@ -17,12 +17,7 @@ export default function ShowContactModal() {
   return (
     <SlideOver openModal={showContact} setOpenModal={setShowContact}>
       <WrapperPoliza>
-        <ContactDetail>
-          {contactDetailTab === contactDetailTabs[0] && <ContactGeneral />}
-          {contactDetailTab === contactDetailTabs[1] && (
-            <ContactPoliza contactID={currentContactID} />
-          )}
-        </ContactDetail>
+        
       </WrapperPoliza>
       {/* <ShowContact contactID={currentContact} /> */}
     </SlideOver>

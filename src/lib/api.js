@@ -74,20 +74,88 @@ export async function createContact(prevState, formData) {
   return { success: true };
 }
 
+export async function updateContact(prevState, formData) {
+  // Validation
+  console.log(formData);
+
+  const fieldsToValidate = {};
+  for (const [field, value] of formData.entries()) {
+    if (
+      !field.endsWith("_original") &&
+      (field === "nombre" || field === "apellidos" || field === "email") &&
+      value !== prevState[field]
+    ) {
+      fieldsToValidate[field] = value;
+    }
+  }
+  for (const field of ["nombre", "apellidos", "email"]) {
+    if (formData.has(field)) {
+      fieldsToValidate[field] = formData.get(field);
+    } else {
+      fieldsToValidate[field] = prevState[field];
+    }
+  }
+
+  // Validate only if there are changed fields
+  if (Object.keys(fieldsToValidate).length > 0) {
+    const validatedFields = contactSchema.safeParse(fieldsToValidate);
+    console.log(fieldsToValidate);
+
+    if (!validatedFields.success) {
+      return {
+        success: false,
+        errors: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+  }
+
+  // keep only the fields found in the addContactFields array
+  const filteredFormData = new FormData();
+  for (const field of addContactFields) {
+    if (formData.get(field)) {
+      // Si el campo profilePhoto no tiene archivo adjunto, no lo incluye
+      if (field === "profilePhoto" && formData.get(field).size === 0) {
+        continue;
+      }
+      filteredFormData.append(field, formData.get(field));
+    }
+  }
+
+  // Mutate Data
+  const result = await fetchAPI(
+    `/crm/contact/${prevState.id}`,
+    "updateContact",
+    "PATCH",
+    filteredFormData,
+    {}
+  );
+
+  console.log(result);
+
+  // Revalidate Cache
+  revalidateTag("contacts");
+  return { success: true };
+}
+
 export async function getContact(id) {
   try {
     const data = await fetchAPI(`/crm/contact/${id}`, "contact");
-    return data;  
+    return data;
   } catch (error) {
     return null;
   }
-  
 }
 
 // POLIZAS
 
 export async function subirPolizaPDF(prevState, formData) {
-  const result = await fetchAPI("/crm/poliza/pdf", "subirPolizaPDF", "POST", formData, {});
+  const result = await fetchAPI(
+    "/crm/poliza/pdf",
+    "subirPolizaPDF",
+    "POST",
+    formData,
+    {}
+  );
   revalidateTag("contact");
   return result;
 }

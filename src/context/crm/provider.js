@@ -11,6 +11,7 @@ export default function CrmContextProvider({ children }) {
   const [lastContactUpdate, setLastContactUpdate] = useState(null);
   const [lastContactsUpdate, setLastContactsUpdate] = useState(null);
   const [showAddContactModal, setShowAddContactModal] = useState(false);
+  const [contactEditMode, setContactEditMode] = useState(false);
 
   const values = useMemo(
     () => ({
@@ -28,6 +29,8 @@ export default function CrmContextProvider({ children }) {
       setLastContactUpdate,
       lastContactsUpdate,
       setLastContactsUpdate,
+      contactEditMode,
+      setContactEditMode,
     }),
     [
       contacts,
@@ -37,6 +40,7 @@ export default function CrmContextProvider({ children }) {
       currentContactID,
       lastContactUpdate,
       lastContactsUpdate,
+      contactEditMode,
     ]
   );
 

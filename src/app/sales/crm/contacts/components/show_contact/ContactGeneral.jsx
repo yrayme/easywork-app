@@ -3,7 +3,7 @@ import {
   UserIcon,
   VideoCameraIcon,
 } from "@heroicons/react/20/solid";
-import React from "react";
+import React, { useState } from "react";
 import ProfileImageInput from "../create_contact/ProfileImageInput";
 import TextInputLocal from "../create_contact/TextInputLocal";
 import SelectInput from "../create_contact/SelectInput";
@@ -12,8 +12,10 @@ import ContactActivityPanel from "../ContactActivityPanel";
 import ActivityHeader from "../ActivityHeader";
 import CardTask from "../CardTask";
 import clsx from "clsx";
-import { getURLContactPhoto } from "@/lib/common";
+import { contactTypes, getURLContactPhoto } from "@/lib/common";
 import useCrmContext from "@/context/crm";
+import { createContact, updateContact } from "@/lib/api";
+import useAppContext from "@/context/app";
 
 export const revalidate = 3600;
 
@@ -49,14 +51,31 @@ const sexoOptions = [
 ];
 
 export default function ContactGeneral() {
-  const { currentContact } = useCrmContext();
+  const { currentContact, contactEditMode, setContactEditMode, setLastContactsUpdate } =
+    useCrmContext();
   const editMode = false;
+  const [contactGender, setContactGender] = React.useState(null);
+  const [contactName, setContactName] = React.useState(null);
 
-  console.log("currentContact", currentContact);
 
   if (!currentContact) {
     return <div>Sin contacto</div>;
   }
+
+  const contactNameValue = ()=> {
+    if (contactName) return contactName;
+    return currentContact.nombre;
+  }
+
+
+  const contactGenderValue = ()=> {
+    if (contactGender) return contactGender;
+    return sexoOptions.find(
+      (option) => option.id === currentContact.sexo
+    )
+  }
+
+
 
   return (
     <div
@@ -69,7 +88,12 @@ export default function ContactGeneral() {
       <div className="sm:w-1/2 bg-transparent p-4 overflow-y-scroll">
         <h1 className="bg-zinc-200 py-4 px-4 rounded-md flex justify-between">
           Datos del Contratante
-          <button>
+          <button
+            type="button"
+            onClick={() => {
+              setContactEditMode(!contactEditMode);
+            }}
+          >
             <span className="sr-only">Editar</span>
             <PencilSquareIcon className="h-6 w-6 text-gray-500 hover:text-indigo-400" />
           </button>
@@ -81,42 +105,57 @@ export default function ContactGeneral() {
           <TextInputLocal
             label="Nombres"
             id="nombre"
-            value={currentContact.nombre}
+            value={contactNameValue()}
+            disabled={!contactEditMode}
+            onChange={(e) => setContactName(e.target.value)}
           />
           <TextInputLocal
             label="Apellidos"
             id="apellidos"
+            disabled={!contactEditMode}
             value={currentContact.apellidos}
           />
           <TextInputLocal
             label="Cargo"
             id="cargo"
+            disabled={!contactEditMode}
             value={currentContact.cargo}
           />
           <TextInputLocal
             label="CURP"
             id="curp"
+            disabled={!contactEditMode}
             value={currentContact.cargo}
             hidden
           />
           <TextInputLocal
             label="Teléfono"
             id="telefono"
+            disabled={!contactEditMode}
             value={currentContact.telefono}
           />
           <TextInputLocal
             label="Email"
             id="email"
             type="email"
+            disabled={!contactEditMode}
             value={currentContact.email}
           />
           <TextInputLocal
             label="Fecha de Nacimiento"
             id="nacimiento"
             type="date"
+            disabled={!contactEditMode}
             value={currentContact.nacimiento}
           />
-          <SelectInput label="Sexo" id="sexo" options={sexoOptions} />
+          <SelectInput
+            label="Sexo"
+            id="sexo"
+            options={sexoOptions}
+            disabled={!contactEditMode}
+            selectedOption={contactGenderValue()}
+            setSelectedOption={setContactGender}
+          />
           <TextInputLocal label="RFC" id="rfc" value={currentContact.rfc} />
           <TextInputLocal
             label="Código Postal"
@@ -131,7 +170,13 @@ export default function ContactGeneral() {
           <SelectInput
             label="Tipo de Contacto"
             id="contactType"
-            options={sexoOptions}
+            options={contactTypes}
+            selectedOption={contactTypes.find(
+              (option) => option.id === currentContact.contactType
+            )}
+            setSelectedOption={contactTypes.find(
+              (option) => option.id === currentContact.contactType
+            )}
           />
           <SelectInput
             label="Responsable"

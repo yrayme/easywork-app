@@ -16,7 +16,7 @@ export default async function fetchAPI(
   };
 
   // Agregar cuerpo solo si el método es POST
-  if (method === "POST" && data) {
+  if ((method === "POST" || method === "PATCH") && data) {
     // Si el cuerpo es un FormData, no es necesario convertirlo a JSON
 
     if (data instanceof FormData) {
