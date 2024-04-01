@@ -168,3 +168,11 @@ export function getURLContactPhoto(objeto) {
   // Devolver null si no se encuentra la URL de la foto
   return null;
 }
+
+export const filterOptions = (query, options) => {
+  return query === ""
+    ? options
+    : options.filter((option) =>
+        option.name.toLowerCase().includes(query.toLowerCase())
+      );
+};

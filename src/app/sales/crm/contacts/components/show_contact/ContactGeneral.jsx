@@ -12,7 +12,7 @@ import ContactActivityPanel from "../ContactActivityPanel";
 import ActivityHeader from "../ActivityHeader";
 import CardTask from "../CardTask";
 import clsx from "clsx";
-import { contactTypes, getURLContactPhoto } from "@/lib/common";
+import { contactTypes, filterOptions, getURLContactPhoto } from "@/lib/common";
 import useCrmContext from "@/context/crm";
 import { createContact, updateContact } from "@/lib/api";
 import useAppContext from "@/context/app";
@@ -51,30 +51,30 @@ const sexoOptions = [
 ];
 
 export default function ContactGeneral() {
-  const { currentContact, contactEditMode, setContactEditMode, setLastContactsUpdate } =
-    useCrmContext();
+  const {
+    currentContact,
+    contactEditMode,
+    crmUsers,
+    setContactEditMode,
+    setLastContactsUpdate,
+  } = useCrmContext();
   const editMode = false;
-  const [contactGender, setContactGender] = React.useState(null);
-  const [contactName, setContactName] = React.useState(null);
-
+  const [contactGender, setContactGender] = useState(null);
+  const [contactName, setContactName] = useState(null);
 
   if (!currentContact) {
     return <div>Sin contacto</div>;
   }
 
-  const contactNameValue = ()=> {
+  const contactNameValue = () => {
     if (contactName) return contactName;
     return currentContact.nombre;
-  }
+  };
 
-
-  const contactGenderValue = ()=> {
+  const contactGenderValue = () => {
     if (contactGender) return contactGender;
-    return sexoOptions.find(
-      (option) => option.id === currentContact.sexo
-    )
-  }
-
+    return sexoOptions.find((option) => option.id === currentContact.sexo);
+  };
 
 
   return (
@@ -178,11 +178,7 @@ export default function ContactGeneral() {
               (option) => option.id === currentContact.contactType
             )}
           />
-          <SelectInput
-            label="Responsable"
-            id="responsible"
-            options={sexoOptions}
-          />
+          <SelectInput label="Responsable" id="responsible" />
           <TextInputLocal
             label="Agente"
             id="agente"
