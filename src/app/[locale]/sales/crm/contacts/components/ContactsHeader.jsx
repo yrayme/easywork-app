@@ -1,9 +1,12 @@
+'use client';
 import React from "react";
 import CreateContactButton from "./CreateContactButton";
 import { Cog8ToothIcon } from "@heroicons/react/20/solid";
 import ContactSubMenu from "./ContactSubMenu";
+import { useTranslation } from "react-i18next";
 
 export default function ContactsHeader() {
+  const { t } = useTranslation();
   return (
     <header className="flex flex-col">
       <div className="lg:px-6 px-2 flex gap-3 items-center bg-white py-4 rounded-md">

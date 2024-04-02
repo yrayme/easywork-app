@@ -147,7 +147,7 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {AppContacts.map((contact) => (
+                {AppContacts && AppContacts.map((contact) => (
                   <tr
                     key={contact.id}
                     className={clsx(
