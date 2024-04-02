@@ -4,8 +4,8 @@ import AddContactTabs from "./create_contact/AddContactTabs";
 import useCrmContext from "@/context/crm";
 import { updateContact } from "@/lib/api";
 import useAppContext from "@/context/app";
-import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const compareValues = (fieldValue, originalValue) => {
   if (fieldValue === "" || fieldValue === null) {
@@ -18,6 +18,7 @@ const compareValues = (fieldValue, originalValue) => {
 };
 
 export default function ContactDetail({ children }) {
+  const { t } = useTranslation();
   const { setShowContact } = useAppContext();
   const {
     currentContact,
@@ -30,7 +31,7 @@ export default function ContactDetail({ children }) {
   const [loading, setLoading] = useState(false);
 
   if (!currentContact) {
-    return <div>Sin contacto</div>;
+    return <div>{t("contacts:edit:not-contact")}</div>;
   }
 
   const handleFormSubmit = async (e) => {
@@ -65,10 +66,10 @@ export default function ContactDetail({ children }) {
       }
 
       setLastContactsUpdate(Date.now());
-      toast.success("¡Contacto Actualizado!");
+      toast.success(t("contacts:edit:updated-contact"));
       setShowContact(false);
     } catch (error) {
-      toast.error("Error al crear el contacto!");
+      toast.error(t("contacts:edit:error"));
     } finally {
       setLoading(false);
     }
@@ -101,7 +102,7 @@ export default function ContactDetail({ children }) {
               type="submit"
               className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              Guardar
+              {t("common:buttons:save")}
             </button>
             <button
               type="button"
@@ -111,7 +112,7 @@ export default function ContactDetail({ children }) {
               }}
               className="ml-4 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
             >
-              Cancelar
+              {t("common:buttons:cancel")}
             </button>
           </div>
         )}

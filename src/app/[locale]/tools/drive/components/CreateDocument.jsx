@@ -19,13 +19,15 @@ import {
 } from "react-icons/tb";
 import { SiMicrosoftoffice } from "react-icons/si";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 export default function CreateDocumentButton() {
+  const { t } = useTranslation();
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-indigo-600 hover:bg-indigo-500 focus:z-10">
-          Agregar
+          {t('tools:drive:add:name')}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-white"
             aria-hidden="true"
@@ -57,7 +59,7 @@ export default function CreateDocumentButton() {
                     className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  Archivo
+                  {t('tools:drive:add:document')}
                 </a>
               )}
             </Menu.Item>
@@ -74,7 +76,7 @@ export default function CreateDocumentButton() {
                     className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  Carpeta
+                  {t('tools:drive:add:folder')}
                 </a>
               )}
             </Menu.Item>
@@ -93,7 +95,7 @@ export default function CreateDocumentButton() {
                     className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  Bitrix.Docs
+                  {t('tools:drive:add:bitrixDocs')}
                 </a>
               )}
             </Menu.Item>
@@ -110,7 +112,7 @@ export default function CreateDocumentButton() {
                     className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  Google Docs
+                  {t('tools:drive:add:googleDocs')}
                 </a>
               )}
             </Menu.Item>
@@ -129,7 +131,7 @@ export default function CreateDocumentButton() {
                     className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  MS Office Online
+                  {t('tools:drive:add:msOfficeOnline')}
                 </a>
               )}
             </Menu.Item>
@@ -146,7 +148,7 @@ export default function CreateDocumentButton() {
                     className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  Office 365
+                  {t('tools:drive:add:office365')}
                 </a>
               )}
             </Menu.Item>
@@ -165,7 +167,7 @@ export default function CreateDocumentButton() {
                     className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  Aplicación de escritorio
+                  {t('tools:drive:add:desktopApp')}
                 </a>
               )}
             </Menu.Item>

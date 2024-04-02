@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import useCrmContext from "@/context/crm";
 import ContactPolizaTable from "./ContactPolizaTable";
+import { useTranslation } from "react-i18next";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function PolizasTab() {
+  const { t } = useTranslation();
   const { currentContact } = useCrmContext();
 
   let [categories] = useState({

@@ -16,6 +16,7 @@ import { contactTypes, filterOptions, getURLContactPhoto } from "@/lib/common";
 import useCrmContext from "@/context/crm";
 import { createContact, updateContact } from "@/lib/api";
 import useAppContext from "@/context/app";
+import { useTranslation } from "react-i18next";
 
 export const revalidate = 3600;
 
@@ -61,9 +62,10 @@ export default function ContactGeneral() {
   const editMode = false;
   const [contactGender, setContactGender] = useState(null);
   const [contactName, setContactName] = useState(null);
+  const { t } = useTranslation();
 
   if (!currentContact) {
-    return <div>Sin contacto</div>;
+    return <div>{t("contacts:edit:not-contact")}</div>;
   }
 
   const contactNameValue = () => {
@@ -87,14 +89,14 @@ export default function ContactGeneral() {
       {/* Menu Izquierda */}
       <div className="sm:w-1/2 bg-transparent p-4 overflow-y-scroll">
         <h1 className="bg-zinc-200 py-4 px-4 rounded-md flex justify-between">
-          Datos del Contratante
+          {t('contacts:create:data')}
           <button
             type="button"
             onClick={() => {
               setContactEditMode(!contactEditMode);
             }}
           >
-            <span className="sr-only">Editar</span>
+            <span className="sr-only">{t("contacts:edit:edit")}</span>
             <PencilSquareIcon className="h-6 w-6 text-gray-500 hover:text-indigo-400" />
           </button>
         </h1>
@@ -103,72 +105,72 @@ export default function ContactGeneral() {
             selectedProfileImage={getURLContactPhoto(currentContact)}
           />
           <TextInputLocal
-            label="Nombres"
+            label={t('contacts:create:name')}
             id="nombre"
             value={contactNameValue()}
             disabled={!contactEditMode}
             onChange={(e) => setContactName(e.target.value)}
           />
           <TextInputLocal
-            label="Apellidos"
+            label={t('contacts:create:lastName')}
             id="apellidos"
             disabled={!contactEditMode}
             value={currentContact.apellidos}
           />
           <TextInputLocal
-            label="Cargo"
+            label={t('contacts:create:charge')}
             id="cargo"
             disabled={!contactEditMode}
             value={currentContact.cargo}
           />
           <TextInputLocal
-            label="CURP"
+            label={t('contacts:create:curp')}
             id="curp"
             disabled={!contactEditMode}
             value={currentContact.cargo}
             hidden
           />
           <TextInputLocal
-            label="Teléfono"
+            label={t('contacts:create:phone')}
             id="telefono"
             disabled={!contactEditMode}
             value={currentContact.telefono}
           />
           <TextInputLocal
-            label="Email"
+            label={t('contacts:create:email')}
             id="email"
             type="email"
             disabled={!contactEditMode}
             value={currentContact.email}
           />
           <TextInputLocal
-            label="Fecha de Nacimiento"
+            label={t('contacts:create:born-date')}
             id="nacimiento"
             type="date"
             disabled={!contactEditMode}
             value={currentContact.nacimiento}
           />
           <SelectInput
-            label="Sexo"
+            label={t('contacts:create:sex')}
             id="sexo"
             options={sexoOptions}
             disabled={!contactEditMode}
             selectedOption={contactGenderValue()}
             setSelectedOption={setContactGender}
           />
-          <TextInputLocal label="RFC" id="rfc" value={currentContact.rfc} />
+          <TextInputLocal label={t('contacts:create:rfc')} id="rfc" value={currentContact.rfc} />
           <TextInputLocal
-            label="Código Postal"
+            label={t('contacts:create:zip-code')}
             id="postal"
             value={currentContact.postal}
           />
           <TextareaLabel
-            label="Dirección"
+            label={t('contacts:create:address')}
             id="direccion"
             value={currentContact.direccion}
           />
           <SelectInput
-            label="Tipo de Contacto"
+            label={t('contacts:create:contact-type')}
             id="contactType"
             options={contactTypes}
             selectedOption={contactTypes.find(
@@ -178,19 +180,19 @@ export default function ContactGeneral() {
               (option) => option.id === currentContact.contactType
             )}
           />
-          <SelectInput label="Responsable" id="responsible" />
+          <SelectInput label={t('contacts:create:responsible')} id="responsible" />
           <TextInputLocal
-            label="Agente"
+            label={t('contacts:create:agent')} 
             id="agente"
             value={currentContact.agente}
           />
           <TextInputLocal
-            label="Sub-Agente"
+            label={t('contacts:create:sub-agent')}
             id="subAgente"
             value={currentContact.subAgente}
           />
           <SelectInput
-            label="Origen"
+            label={t('contacts:create:origen')}
             id="contactSource"
             options={sexoOptions}
           />

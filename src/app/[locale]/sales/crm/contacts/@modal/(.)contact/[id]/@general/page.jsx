@@ -10,6 +10,7 @@ import ActivityHeader from "../../../../components/ActivityHeader";
 import CardTask from "../../../../components/CardTask";
 import TextInputLocal from "../../../../components/create_contact/TextInputLocal";
 import { getURLContactPhoto } from "@/lib/common";
+import { useTranslation } from "react-i18next";
 
 async function useContact({ contactID }) {
   const response = await getContact(contactID);
@@ -51,6 +52,7 @@ const sexoOptions = [
 
 
 export default async function Page({params: { id },}) {
+  const { t } = useTranslation();
   const contactInfo = await useContact({ contactID: id });
   const editMode = false;
 
@@ -66,69 +68,69 @@ export default async function Page({params: { id },}) {
       {/* Menu Izquierda */}
       <div className="sm:w-1/2 bg-transparent p-4 overflow-y-scroll">
         <h1 className="bg-zinc-200 py-4 px-4 rounded-md flex justify-between">
-          Datos del Contratante
+        {t('contacts:create:data')}
           <button>
-            <span className="sr-only">Editar</span>
+            <span className="sr-only">{t('common:buttons:edit')}</span>
             <PencilSquareIcon className="h-6 w-6 text-gray-500 hover:text-indigo-400" />
           </button>
         </h1>
         <div className="grid grid-cols-1 gap-x-6 gap-y-2 sm:max-w-xl sm:grid-cols-6 h-full px-1 lg:px-12 mx-auto">
           <ProfileImageInput selectedProfileImage={getURLContactPhoto(contactInfo)} />
-          <TextInputLocal label="Nombres" id="nombre" value={contactInfo.nombre} />
+          <TextInputLocal label={t('contacts:create:name')} id="nombre" value={contactInfo.nombre} />
           <TextInputLocal
-            label="Apellidos"
+            label={t('contacts:create:lastName')}
             id="apellidos"
             value={contactInfo.apellidos}
           />
-          <TextInputLocal label="Cargo" id="cargo" value={contactInfo.cargo} />
-          <TextInputLocal label="CURP" id="curp" value={contactInfo.cargo} hidden />
+          <TextInputLocal label={t('contacts:create:charge')} id="cargo" value={contactInfo.cargo} />
+          <TextInputLocal label={t('contacts:create:curp')} id="curp" value={contactInfo.cargo} hidden />
           <TextInputLocal
-            label="Teléfono"
+            label={t('contacts:create:phone')}
             id="telefono"
             value={contactInfo.telefono}
           />
           <TextInputLocal
-            label="Email"
+            label={t('contacts:create:email')}
             id="email"
             type="email"
             value={contactInfo.email}
           />
           <TextInputLocal
-            label="Fecha de Nacimiento"
+            label={t('contacts:create:born-date')}
             id="nacimiento"
             type="date"
             value={contactInfo.nacimiento}
           />
-          <SelectInput label="Sexo" id="sexo" options={sexoOptions} />
-          <TextInputLocal label="RFC" id="rfc" value={contactInfo.rfc} />
+          <SelectInput label={t('contacts:create:sex')} id="sexo" options={sexoOptions} />
+          <TextInputLocal label={t('contacts:create:rfc')} id="rfc" value={contactInfo.rfc} />
           <TextInputLocal
-            label="Código Postal"
+            label={t('contacts:create:zip-code')}
             id="postal"
             value={contactInfo.postal}
           />
           <TextareaLabel
-            label="Dirección"
+            label={t('contacts:create:address')}
             id="direccion"
             value={contactInfo.direccion}
           />
           <SelectInput
-            label="Tipo de Contacto"
+            label={t('contacts:create:contact-type')}
             id="contactType"
             options={sexoOptions}
           />
           <SelectInput
-            label="Responsable"
+            label={t('contacts:create:responsible')}
             id="responsible"
             options={sexoOptions}
           />
-          <TextInputLocal label="Agente" id="agente" value={contactInfo.agente} />
+          <TextInputLocal label={t('contacts:create:agent')} id="agente" value={contactInfo.agente} />
           <TextInputLocal
-            label="Sub-Agente"
+            label={t('contacts:create:sub-agent')}
             id="subAgente"
             value={contactInfo.subAgente}
           />
           <SelectInput
-            label="Origen"
+            label={t('contacts:create:origen')}
             id="contactSource"
             options={sexoOptions}
           />

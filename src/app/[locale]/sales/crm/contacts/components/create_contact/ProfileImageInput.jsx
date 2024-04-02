@@ -1,8 +1,10 @@
 // ProfileImageInput.js
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 function ProfileImageInput({ selectedProfileImage, onChange }) {
+  const { t } = useTranslation();
   return (
     <div className="col-span-full flex items-center gap-x-8 mt-2">
       <Image
@@ -28,11 +30,11 @@ function ProfileImageInput({ selectedProfileImage, onChange }) {
             type="button"
             className="rounded-md block cursor-pointer pointer-events-none bg-zinc-800/80 px-3 py-2 peer-focus:ring-2 peer-focus:ring-blue-600 text-sm font-semibold text-white shadow-sm peer-hover:bg-zinc-700/70"
           >
-            Cambiar foto
+            {t('contacts:create:change-photo')}
           </label>
         </div>
         <p className="mt-2 text-xs leading-5 text-gray-400">
-          JPG, GIF or PNG. 1MB max.
+          {t('contacts:create:jpg')}
         </p>
       </div>
     </div>

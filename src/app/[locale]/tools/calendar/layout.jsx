@@ -16,18 +16,19 @@ export default function CalendarLayout({
 
   return (
     <>
-      <div className="h-calc flex flex-col flex-grow">
+      <div className="flex flex-col flex-grow">
         <CalendarHeader />
-
         {modal}
-        {children}
-        {calendarView === calendarViews[0]
-          ? day
-          : calendarView === calendarViews[1]
-          ? week
-          : calendarView === calendarViews[2]
-          ? month
-          : programar}
+        <div className="h-[63vh] mb-10 overflow-auto">
+          {children}
+          {calendarView === calendarViews[0]
+            ? day
+            : calendarView === calendarViews[1]
+            ? week
+            : calendarView === calendarViews[2]
+            ? month
+            : programar}
+          </div>
       </div>
     </>
   );

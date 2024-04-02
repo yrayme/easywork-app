@@ -1,9 +1,12 @@
+'use client';
 import React, { Suspense } from "react";
 import ContactsHeader from "./components/ContactsHeader";
 import CreateContactModal from "./components/create_contact/CreateContactModal";
 import ShowContactModal from "./components/show_contact/ShowContactModal";
+import { useTranslation } from "react-i18next";
 
-export default async function ContactLayout({ children, table, modal }) {
+export default function ContactLayout({ children, table, modal }) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col w-full">
       <ContactsHeader />
@@ -29,12 +32,12 @@ export default async function ContactLayout({ children, table, modal }) {
                 fill="currentFill"
               />
             </svg>
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">{t('common:loading')}</span>
           </div>
         }
       >
         {modal}
-        <CreateContactModal />
+        <CreateContactModal/>
         <ShowContactModal />
         {table}
         {children}

@@ -1,0 +1,27 @@
+{
+    "drive": {
+        "name": "Drive-Documentos",
+        "search": "Buscar",
+        "filter": "Filtrar y Buscar",
+        "home": "Hogar",
+        "my-unit": "Mi unidad",
+        "add": {
+            "name": "Agregar",
+            "document": "Archivo",
+            "folder": "Carpeta",
+            "bitrixDocs": "Bitrix.Docs",
+            "googleDocs": "Google Docs",
+            "msOfficeOnline": "MS Office Online",
+            "office365": "Office 365",
+            "desktopApp": "Aplicación de escritorio"
+        },
+        "table": {
+            "edit": "Bulk edit",
+            "delete": "Delete all",
+            "name": "Nombre",
+            "modified": "Modificado",
+            "modified-by": "Modificado por",
+            "size": "Tamaño"
+        }
+    }
+}

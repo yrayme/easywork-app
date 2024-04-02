@@ -1,12 +1,15 @@
 import { HomeIcon } from "@heroicons/react/20/solid";
+import { useTranslation } from "react-i18next";
 import { FiHardDrive } from "react-icons/fi";
 
-const pages = [
-  { name: "Mi unidad", href: "#", current: false },
-  { name: "Rosmer Campos", href: "#", current: true },
-];
+
 
 export default function DriveBreadcrumb() {
+  const { t } = useTranslation();
+  const pages = [
+    { name: t('tools:drive:my-unit'), href: "#", current: false },
+    { name: "Rosmer Campos", href: "#", current: true },
+  ];
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4">
@@ -17,7 +20,7 @@ export default function DriveBreadcrumb() {
                 className="h-5 w-5 flex-shrink-0"
                 aria-hidden="true"
               />
-              <span className="sr-only">Home</span>
+              <span className="sr-only">{t('tools:drive:home')}</span>
             </a>
           </div>
         </li>

@@ -3,6 +3,7 @@ import { getFileIcon } from "@/lib/drive_helper";
 import clsx from "clsx";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const files = [
   {
@@ -53,6 +54,7 @@ const files = [
 ];
 
 export default function Page() {
+  const { t } = useTranslation();
   const checkbox = useRef();
   const [checked, setChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -75,8 +77,8 @@ export default function Page() {
   return (
     <div className="">
       <div className="mt-8 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div className="overflow-x-auto">
+          <div className="inline-block min-w-full py-2 align-middle">
             <div className="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
               {selectedFiles.length > 0 && (
                 <div className="absolute left-14 top-0 flex h-12 items-center space-x-3 bg-white sm:left-12">
@@ -84,13 +86,13 @@ export default function Page() {
                     type="button"
                     className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
                   >
-                    Bulk edit
+                    {t('tools:drive:table:edit')}
                   </button>
                   <button
                     type="button"
                     className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
                   >
-                    Delete all
+                    {t('tools:drive:table:delete')}
                   </button>
                 </div>
               )}
@@ -110,25 +112,25 @@ export default function Page() {
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
-                      Nombre
+                      {t('tools:drive:table:name')}
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Modificado
+                      {t('tools:drive:table:modified')}
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Modificado por
+                      {t('tools:drive:table:modified-by')}
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Tamaño
+                      {t('tools:drive:table:size')}
                     </th>
                   </tr>
                 </thead>

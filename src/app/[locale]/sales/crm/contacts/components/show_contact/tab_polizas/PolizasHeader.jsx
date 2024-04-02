@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useFormState } from "react-dom";
 import ComboboxComponent from "@/components/ComboboxComponent";
 import useCrmContext from "@/context/crm";
+import { useTranslation } from "react-i18next";
 
 const initialState = {
   filePdf: "",
@@ -25,6 +26,7 @@ const typePoliza = [
 ];
 
 export default function PolizasHeader({ contactID }) {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
   const [file, setFile] = React.useState(null);
   const [sending, setSending] = React.useState(false);
@@ -46,15 +48,15 @@ export default function PolizasHeader({ contactID }) {
 
       if (!result?.id) {
         if (result?.error) {
-          return toast.error(result.message || "Poliza ya existe");
+          return toast.error(result.message || t('contacts:edit:policies:exists'));
         }
-        return toast.error("Error al subir el archivo");
+        return toast.error(t('contacts:edit:policies:error-file'));
       }
 
       setLastContactUpdate(Date.now());
-      toast.success("Póliza creada!");
+      toast.success(t('contacts:edit:policies:created'));
     } catch (error) {
-      toast.error("Error al subir el archivo");
+      toast.error(t('contacts:edit:policies:error-file'));
     } finally {
       setIsOpen(false);
       setFile(null);
@@ -68,22 +70,22 @@ export default function PolizasHeader({ contactID }) {
         type="button"
         className="rounded-md bg-easy-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-easy-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-easy-600"
       >
-        General
+        {t('contacts:edit:policies:general')}
       </button>
       <SelectRamo />
       <button
         type="button"
         className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
       >
-        Documentos
+        {t('contacts:edit:policies:documents')}
       </button>
       <button
         type="button"
         onClick={() => setIsOpen(true)}
         className="inline-flex items-center gap-x-1.5 rounded-md bg-easy-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-easy-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-easy-600"
       >
-        <PlusCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-        Agregar
+        <PlusCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />        
+        {t('contacts:edit:policies:add')}
       </button>
 
       <Dialog
@@ -99,8 +101,8 @@ export default function PolizasHeader({ contactID }) {
             onSubmit={handleSubmit}
             className="flex w-full flex-col gap-y-3"
           >
-            <h1 className="text-center text-lg font-medium">
-              Subir póliza desde archivo PDF
+            <h1 className="text-center text-lg font-medium">              
+              {t('contacts:edit:policies:upload')}
             </h1>
             <label
               type="button"
@@ -115,7 +117,7 @@ export default function PolizasHeader({ contactID }) {
                 aria-hidden="true"
               />
               <span className="mt-2 block text-sm font-semibold text-gray-900">
-                {file ? file.name : "Seleccionar archivo PDF"}
+                {file ? file.name : t('contacts:edit:policies:select')}
               </span>
             </label>
             <input
@@ -137,13 +139,13 @@ export default function PolizasHeader({ contactID }) {
             />
             <div className="flex gap-2 w-full">
               <ComboboxComponent
-                label="Aseguradora"
+                label={t('contacts:edit:policies:insurance')}
                 elements={company}
                 id="aseguradora"
                 required={true}
               />
               <ComboboxComponent
-                label="Tipo de Póliza"
+                label={t('contacts:edit:policies:policy-type')}
                 elements={typePoliza}
                 id="tipo"
                 required={true}
@@ -155,7 +157,7 @@ export default function PolizasHeader({ contactID }) {
               disabled={sending || !file}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-easy-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-easy-600"
             >
-              {sending ? "Subiendo..." : "Subir"}
+              {sending ? t('common:buttons:uploading') : t('common:buttons:upload')}
             </button>
           </form>
         </DialogPanel>

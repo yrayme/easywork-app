@@ -58,7 +58,7 @@ export default function DayView() {
   }, []);
 
   return (
-    <div className="isolate flex flex-auto overflow-hidden bg-slate-100">
+    <div className="isolate flex flex-auto overflow-auto bg-slate-100 h-cal">
       <div
         ref={container}
         className="flex flex-auto flex-col overflow-auto bg-white"

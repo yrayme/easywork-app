@@ -7,7 +7,7 @@ import TaskSubMenu from "./components/TaskSubMenu";
 
 export default function TaskLayout({ children, table }) {
   return (
-    <div className="h-calc flex flex-col flex-grow">
+    <div className="flex flex-col flex-grow">
       <ToolHeader
         title="Tareas"
         ActionButton={CreateTaskButton}

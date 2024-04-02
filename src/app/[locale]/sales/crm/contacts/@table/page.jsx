@@ -1,6 +1,7 @@
 "use client";
 import {
   ChatBubbleBottomCenterIcon,
+  ChevronDownIcon,
   EnvelopeIcon,
   PhoneIcon,
 } from "@heroicons/react/20/solid";
@@ -11,8 +12,10 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import useCrmContext from "@/context/crm";
 import { getURLContactPhoto } from "@/lib/common";
 import useAppContext from "@/context/app";
+import { useTranslation } from "react-i18next";
 
 export default function Page() {
+  const { t } = useTranslation();
   const checkbox = useRef();
   const [checked, setChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -23,9 +26,9 @@ export default function Page() {
   useLayoutEffect(() => {
     if (checkbox.current) {
       const isIndeterminate =
-        selectedContacts.length > 0 &&
+        selectedContacts && selectedContacts.length > 0 &&
         selectedContacts.length < AppContacts.length;
-      setChecked(selectedContacts.length === AppContacts?.length);
+      setChecked(selectedContacts?.length === AppContacts?.length);
       setIndeterminate(isIndeterminate);
       checkbox.current.indeterminate = isIndeterminate;
     }
@@ -57,7 +60,7 @@ export default function Page() {
               ></path>
             </svg>
           </div>
-          <p className="text-lg font-medium text-gray-900">No hay contactos</p>
+          <p className="text-lg font-medium text-gray-400">{t('contacts:table:not-data')}</p>
         </div>
       </div>
     );
@@ -68,19 +71,19 @@ export default function Page() {
       <div className="overflow-x-auto">
         <div className="inline-block min-w-full py-2 align-middle">
           <div className="relative overflow-hidden  sm:rounded-lg">
-            {selectedContacts.length > 0 && (
+            {selectedContacts && selectedContacts.length > 0 && (
               <div className="absolute left-14 top-0 flex h-12 items-center space-x-3 bg-white sm:left-12">
                 <button
                   type="button"
-                  className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
+                  className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-medium text-gray-400 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
                 >
-                  Editar
+                  {t('common:buttons:edit')}
                 </button>
                 <button
                   type="button"
-                  className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
+                  className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-medium text-gray-400 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
                 >
-                  Eliminar
+                  {t('common:buttons:delete')}
                 </button>
               </div>
             )}
@@ -98,51 +101,88 @@ export default function Page() {
                   </th>
                   <th
                     scope="col"
-                    className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    className="min-w-[12rem] py-3.5 pr-3 text-sm font-medium text-gray-400"
                   >
-                    Nombre
+                    <div className="flex justify-center items-center gap-2">
+                      {t('contacts:table:contact')}
+                      <div>
+                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                      </div>
+                    </div>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 bg-indigo-100/30"
+                    className="px-3 py-3.5 text-sm font-medium text-gray-400"
                   >
-                    Cumpleaños
+                    <div className="flex justify-center items-center gap-2">
+                      {t('contacts:table:birthday')}
+                      <div>
+                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                      </div>
+                    </div>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-sm font-medium text-gray-400"
                   >
-                    Responsable
+                    <div className="flex justify-center items-center gap-2">
+                      {t('contacts:table:responsible')}
+                      <div>
+                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                      </div>
+                    </div>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-sm font-medium text-gray-400"
                   >
-                    Email
+                    <div className="flex justify-center items-center gap-2">
+                      {t('contacts:table:email')}
+                      <div>
+                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                      </div>
+                    </div>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-sm font-medium text-gray-400"
                   >
-                    Teléfono
+                    <div className="flex justify-center items-center gap-2">
+                      {t('contacts:table:phone')}
+                      <div>
+                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                      </div>
+                    </div>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-sm font-medium text-gray-400"
                   >
-                    Creado El
+                    <div className="flex justify-center items-center gap-2">
+                      {t('contacts:table:created')}
+                      <div>
+                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                      </div>
+                    </div>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-sm font-medium text-gray-400"
                   >
-                    Origen
+                    <div className="flex justify-center items-center gap-2">
+                      {t('contacts:table:origin')}
+                      <div>
+                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                      </div>
+                    </div>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-sm font-medium text-gray-400"
                   >
-                    Actividades
+                    <div className="flex justify-center items-center">
+                      {t('contacts:table:activities')}
+                    </div>
                   </th>
                 </tr>
               </thead>
@@ -180,7 +220,7 @@ export default function Page() {
                         "whitespace-nowrap py-4 pr-3 text-sm font-medium",
                         selectedContacts.includes(contact)
                           ? "text-indigo-600"
-                          : "text-gray-900"
+                          : "text-gray-400"
                       )}
                     >
                       <div className="flex items-center">
@@ -196,7 +236,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="ml-4">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-gray-400">
                             <button
                               onClick={() => {
                                 setCurrentContactID(contact.id);

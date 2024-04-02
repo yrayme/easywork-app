@@ -11,6 +11,7 @@ import {
   MagnifyingGlassIcon,
   TagIcon,
 } from "@heroicons/react/24/outline";
+import { useTranslation } from "react-i18next";
 
 const people = [
   {
@@ -38,6 +39,7 @@ function classNames(...classes) {
 }
 
 export default function SearchBox() {
+  const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [selectedPerson, setSelectedPerson] = useState(null);
 
@@ -85,7 +87,7 @@ export default function SearchBox() {
       <input
         id="search-field"
         className=" w-full h-8 my-auto rounded-xl border-0 py-0 pl-2 pr-8 text-black placeholder:text-easy-dark focus:ring-0 sm:text-sm bg-gray-200 font-medium"
-        placeholder="Buscar personas, documentos y mas..."
+        placeholder={t('common:header:placeholder-search')}
         type="search"
         name="search"
       />

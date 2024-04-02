@@ -1,22 +1,24 @@
 import clsx from "clsx";
 import React from "react";
-
-const tabs = [
-  { name: "Correo", href: "#", current: true, disabled: false },
-  { name: "Tareas", href: "#", current: false, disabled: true },
-  { name: "Whatsapp", href: "#", current: false, disabled: true },
-  { name: "Comentario", href: "#", current: false, disabled: true },
-  { name: "Citas", href: "#", current: false, disabled: true },
-];
+import { useTranslation } from "react-i18next";
 
 export default function ActivityHeader() {
+  const { t } = useTranslation();
+  const tabs = [
+    { name: t('contacts:create:activities:email'), href: "#", current: true, disabled: false },
+    { name: t('contacts:create:activities:tasks'), href: "#", current: false, disabled: true },
+    { name: t('contacts:create:activities:whatsapp'), href: "#", current: false, disabled: true },
+    { name: t('contacts:create:activities:comment'), href: "#", current: false, disabled: true },
+    { name: t('contacts:create:activities:appointments'), href: "#", current: false, disabled: true },
+  ];
+  
   return (
     <>
       <div className="bg-white px-2 rounded-md w-full shadow-sm">
         <div className="bg-white">
           <div className="sm:hidden">
             <label htmlFor="tabs" className="sr-only">
-              Select a tab
+              {t('contacts:create:select')}
             </label>
             {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
             <select
@@ -61,7 +63,7 @@ export default function ActivityHeader() {
             name="todo"
             id="todo"
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            placeholder="Tareas por hacer"
+            placeholder={t('contacts:create:activities:todo-tasks')}
           />
         </div>
       </div>

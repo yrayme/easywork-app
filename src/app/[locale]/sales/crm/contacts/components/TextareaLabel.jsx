@@ -27,9 +27,9 @@ export default function TextareaLabel({
           value={value}
         />
       </div>
-      <p className="mt-1 text-sm leading-6 text-gray-400">
+      {/* <p className="mt-1 text-sm leading-6 text-gray-400">
         {`Escriba la ${label.toLowerCase()} del cliente.`}
-      </p>
+      </p> */}
     </div>
   );
 }

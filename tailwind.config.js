@@ -42,6 +42,7 @@ module.exports = {
           100: "#F2F6F7",
           200: "#D9D9D9",
           300: "#DFE3E6",
+          400: "#54585B"
         },
         tremor: {
           brand: {

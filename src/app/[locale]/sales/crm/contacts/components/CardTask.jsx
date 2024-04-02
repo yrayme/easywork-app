@@ -1,5 +1,5 @@
 import React from "react";
-
+//is a component that must recieve its props
 export default function CardTask() {
   return (
     <div className="bg-white px-4 py-3 rounded-md w-full flex gap-2 flex-col">

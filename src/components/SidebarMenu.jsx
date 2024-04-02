@@ -2,15 +2,16 @@
 import { usePathname } from 'next/navigation';
 import React from 'react'
 import { Disclosure, } from "@headlessui/react";
-import { sidebarNavigation } from '@/lib/common';
 import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
+import { useSidebar } from '@/hooks/useCommon';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 const SidebarMenu = () => {
     const pathname = usePathname();
+    const { sidebarNavigation } = useSidebar();
     return (        
         <nav className="flex flex-1 flex-col mt-3">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">

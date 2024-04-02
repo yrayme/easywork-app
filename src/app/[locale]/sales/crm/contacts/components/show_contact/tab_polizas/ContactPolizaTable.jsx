@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import PolizasEmpty from "./PolizasEmpty";
+import { useTranslation } from "react-i18next";
 
 const people = [
   {
@@ -12,6 +13,7 @@ const people = [
 ];
 
 export default function ContactPolizaTable({ polizas }) {
+  const { t } = useTranslation();
   if (!polizas || polizas.length === 0) {
     return <PolizasEmpty/>
   }
@@ -28,7 +30,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
                     <a href="#" className="group inline-flex">
-                      Poliza
+                      {t('contacts:edit:policies:table:policy')}
                       <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                         <ChevronDownIcon
                           className="h-5 w-5"
@@ -42,7 +44,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     <a href="#" className="group inline-flex">
-                      Producto
+                      {t('contacts:edit:policies:table:product')}
                       <span className="ml-2 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200">
                         <ChevronDownIcon
                           className="h-5 w-5"
@@ -56,7 +58,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     <a href="#" className="group inline-flex">
-                      Compañía
+                      {t('contacts:edit:policies:table:company')}
                       <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                         <ChevronDownIcon
                           className="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible"
@@ -70,7 +72,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     <a href="#" className="group inline-flex">
-                      Status
+                      {t('contacts:edit:policies:table:status')}
                       <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                         <ChevronDownIcon
                           className="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible"
@@ -84,7 +86,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     <a href="#" className="group inline-flex">
-                      Inicio
+                      {t('contacts:edit:policies:table:start')}
                       <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                         <ChevronDownIcon
                           className="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible"
@@ -98,7 +100,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     <a href="#" className="group inline-flex">
-                      Vencimiento
+                      {t('contacts:edit:policies:table:expiration')}
                       <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                         <ChevronDownIcon
                           className="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible"
@@ -112,7 +114,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     <a href="#" className="group inline-flex">
-                      Importe
+                      {t('contacts:edit:policies:table:amount')}
                       <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                         <ChevronDownIcon
                           className="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible"
@@ -126,7 +128,7 @@ export default function ContactPolizaTable({ polizas }) {
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     <a href="#" className="group inline-flex">
-                      Ramo
+                      {t('contacts:edit:policies:table:branch')}
                       <span className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                         <ChevronDownIcon
                           className="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible"
@@ -172,7 +174,7 @@ export default function ContactPolizaTable({ polizas }) {
                         href="#"
                         className="text-indigo-600 hover:text-indigo-900"
                       >
-                        Editar<span className="sr-only">, {poliza.name}</span>
+                        {t('common:buttons:edit')}<span className="sr-only">, {poliza.name}</span>
                       </a>
                     </td>
                   </tr>

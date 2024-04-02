@@ -1,29 +1,40 @@
 'use client';
 import React from "react";
-import CreateContactButton from "./CreateContactButton";
-import { Cog8ToothIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, Cog8ToothIcon } from "@heroicons/react/20/solid";
 import ContactSubMenu from "./ContactSubMenu";
 import { useTranslation } from "react-i18next";
+import Button from "@/components/form/Button";
+import useAppContext from "@/context/app";
 
 export default function ContactsHeader() {
   const { t } = useTranslation();
+  const { setOpenModal } = useAppContext();
+
   return (
     <header className="flex flex-col">
       <div className="lg:px-6 px-2 flex gap-3 items-center bg-white py-4 rounded-md">
-        <h1 className="text-2xl font-semibold leading-6 text-gray-900 hidden md:block">
-          Contacto
+        <h1 className="text-2xl font-semibold leading-6 text-gray-900 hidden md:block">          
+          {t('contacts:header:contact')}
         </h1>
-        <CreateContactButton />
+        <Button 
+          label={t('contacts:header:create')}
+          type="button"
+          onclick={() => setOpenModal(true)}
+          icon={<ChevronDownIcon
+            className="ml-2 h-5 w-5 text-white"
+            aria-hidden="true"
+          />}
+        />
         <div className="flex-grow">
           <label htmlFor="search" className="sr-only">
-            search
+            {t('contacts:header:search')}
           </label>
           <input
             type="search"
             name="search"
             id="search-cal"
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            placeholder="Buscar"
+            placeholder={t('contacts:header:search')}
           />
         </div>
         <button

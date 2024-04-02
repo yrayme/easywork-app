@@ -18,9 +18,11 @@ import { useFormState } from "react-dom";
 import { createContact } from "@/lib/api";
 import useCrmContext from "@/context/crm";
 import { DatePicker } from "@tremor/react";
-import { es } from "date-fns/locale";
+import { es, enUS } from "date-fns/locale";
 import { toast } from "react-toastify";
 import { contactTypes } from "@/lib/common";
+import { useTranslation } from "react-i18next";
+import { useParams } from "next/navigation";
 
 const contactSources = [
   { id: 1, name: "Correo electrónico" },
@@ -82,6 +84,8 @@ const filterOptions = (query, options) => {
 };
 
 export default function CreateContact() {
+  const { t } = useTranslation();
+  const { locale }= useParams()
   const { setOpenModal } = useAppContext();
   const { crmUsers, setLastContactsUpdate } = useCrmContext();
 
@@ -118,9 +122,8 @@ export default function CreateContact() {
   }, []);
 
   const handleBirthdayChange = useCallback((value) => {
-    // format date from "Mon Feb 05 2024 00:00:00 GMT-0400 (hora de Venezuela)" to mysql format "2024-02-05"
     const date = new Date(value);
-    const formattedDate = date.toISOString().split("T")[0];
+    const formattedDate = value ? date?.toISOString().split("T")[0] : "";
     setBirthday(formattedDate);
   }, []);
 
@@ -142,10 +145,10 @@ export default function CreateContact() {
       }
 
       setLastContactsUpdate(Date.now());
-      toast.success("¡Contacto creado!");
+      toast.success(t('contacts:create:msg'));
       setOpenModal(false);
     } catch (error) {
-      toast.error("Error al crear el contacto!");
+      toast.error(t('contacts:create:error'));
     } finally {
       setLoading(false);
     }
@@ -165,7 +168,7 @@ export default function CreateContact() {
 
           <div className="flex items-center justify-center h-full flex-col gap-2 cursor-progress">
             <div className="animate-spin rounded-full h-28 w-28 border-t-2 border-b-2 border-easy-600" />
-            <p className="text-easy-600 animate-pulse select-none">Guardando...</p>
+            <p className="text-easy-600 animate-pulse select-none">{t('contacts:create:save')}</p>
           </div>
         </div>
       )}
@@ -176,7 +179,7 @@ export default function CreateContact() {
         {/* Encabezado del Formulario */}
         <div className="bg-transparent py-6 mx-4">
           <div className="flex items-start flex-col justify-between space-y-3">
-            <h1 className="text-2xl">Nuevo Cliente</h1>
+            <h1 className="text-2xl">{t("contacts:create:client")}</h1>
             <AddContactTabs />
           </div>
         </div>
@@ -186,7 +189,7 @@ export default function CreateContact() {
           {/* Menu Izquierda */}
           <div className="sm:w-1/2 bg-transparent p-4 overflow-y-scroll">
             <h1 className="bg-zinc-200 py-4 px-4 rounded-md">
-              Datos del Contratante
+              {t('contacts:create:data')}
             </h1>
             <div className="grid grid-cols-1 gap-x-6 gap-y-2 sm:max-w-xl sm:grid-cols-6 h-full px-1 lg:px-12 mx-auto">
               <ProfileImageInput
@@ -194,34 +197,34 @@ export default function CreateContact() {
                 onChange={handleProfileImageChange}
               />
               <TextInputLocal
-                label="Nombres"
+                label={t('contacts:create:name')}
                 id="nombre"
-                placeholder="Ej.: Luis"
+                placeholder={t('contacts:create:placeholder-name')}
                 required
                 errors={errors}
               />
               <TextInputLocal
-                label="Apellidos"
+                label={t('contacts:create:lastName')}
                 id="apellidos"
-                placeholder="Ej.: Herrera"
+                placeholder={t('contacts:create:placeholder-lastname')}
                 errors={errors}
               />
-              <TextInputLocal label="Cargo" id="position" placeholder="Cargo" />
+              <TextInputLocal label={t('contacts:create:charge')} id="position" placeholder={t('contacts:create:charge')} />
               <TextInputLocal
-                label="CURP"
+                label={t('contacts:create:curp')}
                 id="curp"
                 placeholder="124125153534"
                 hidden
                 errors={errors}
               />
               <TextInputLocal
-                label="Teléfono"
+                label={t('contacts:create:phone')}
                 id="telefono"
                 placeholder="+1 (555) 987-6543"
                 type="tel"
               />
               <TextInputLocal
-                label="Email"
+                label={t('contacts:create:email')}
                 id="email"
                 placeholder="usuario@domain.com"
                 type="email"
@@ -232,12 +235,12 @@ export default function CreateContact() {
                   htmlFor="nacimiento"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Fecha de nacimiento
+                  {t('contacts:create:born-date')}
                 </label>
                 <DatePicker
-                  locale={es}
+                  locale={locale === "es" ? es : enUS}
                   enableYearNavigation={true}
-                  placeholder="Seleccionar"
+                  placeholder={t('contacts:create:select')}
                   displayFormat="dd/MM/yyyy"
                   onValueChange={handleBirthdayChange}
                 />
@@ -249,7 +252,7 @@ export default function CreateContact() {
                 />
               </div>
               <SelectInput
-                label="Sexo"
+                label={t('contacts:create:sex')}
                 id="sexo"
                 options={filteredSexoOptions}
                 selectedOption={contactSexo}
@@ -257,12 +260,12 @@ export default function CreateContact() {
                 onChangeInput={setQuerySexo}
               />
               <TextInputLocal
-                label="RFC"
+                label={t('contacts:create:rfc')}
                 id="rfc"
                 placeholder="XEXX010101000"
               />
               <TextInputLocal
-                label="Código Postal"
+                label={t('contacts:create:zip-code')}
                 id="postal"
                 placeholder="Ej.: 12345"
                 hidden
@@ -270,12 +273,12 @@ export default function CreateContact() {
               />
               <DocumentSelector />
               <TextArea
-                label="Dirección"
+                label={t('contacts:create:address')}
                 id="direccion"
-                placeholder="Escriba la dirección del cliente."
+                placeholder={t('contacts:create:placeholder-address')}
               />
               <SelectInput
-                label="Tipo de contacto"
+                label={t('contacts:create:contact-type')}
                 id="tipoContacto"
                 options={filteredContactTypes}
                 selectedOption={contactType}
@@ -283,21 +286,21 @@ export default function CreateContact() {
                 onChangeInput={setQuery}
               />
               <SelectInput
-                label="Responsable"
+                label={t('contacts:create:responsible')}
                 id="responsible"
                 options={filteredContactResponsible}
                 selectedOption={contactResponsible}
                 setSelectedOption={setContactResponsible}
                 onChangeInput={setQueryResponsible}
               />
-              <TextInputLocal label="Agente" id="agente" placeholder="Agente" />
+              <TextInputLocal label={t('contacts:create:agent')} id="agente" placeholder={t('contacts:create:agent')} />
               <TextInputLocal
-                label="Sub-Agente"
+                label={t('contacts:create:sub-agent')}
                 id="subAgente"
-                placeholder="Sub Agente"
+                placeholder={t('contacts:create:sub-agent')}
               />
               <SelectInput
-                label="Origen"
+                label={t('contacts:create:origen')}
                 id="origen"
                 options={filteredContactSources}
                 selectedOption={contactSource}
@@ -319,14 +322,14 @@ export default function CreateContact() {
             aria-disabled={loading}
             className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
           >
-            {loading ? "Guardando..." : "Guardar"}
+            {loading ? t('common:buttons:saving') : t('common:buttons:save')}
           </button>
           <button
             type="button"
             className="ml-4 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
             onClick={() => setOpenModal(false)}
           >
-            Cancelar
+            {t('common:buttons:cancel')}
           </button>
         </div>
       </form>
@@ -335,13 +338,14 @@ export default function CreateContact() {
 }
 
 function DocumentSelector() {
+  const { t } = useTranslation();
   return (
     <div className="col-span-full">
       <label
         htmlFor="cover-photo"
         className="block text-sm font-medium leading-6 text-gray-900"
       >
-        Identificaciones INE, RFC o Pasaporte
+        {t('contacts:create:passport')}
       </label>
       <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
         <div className="text-center">
@@ -354,7 +358,7 @@ function DocumentSelector() {
               htmlFor="file-upload"
               className="relative cursor-pointer rounded-md bg-zinc-100 font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
             >
-              <span>Subir un archivo</span>
+              <span>{t('contacts:create:upload-file')}</span>
               <input
                 id="file-upload"
                 name="file-upload"
@@ -362,10 +366,10 @@ function DocumentSelector() {
                 className="sr-only"
               />
             </label>
-            <p className="pl-1">o arrastrar y soltar</p>
+            <p className="pl-1">{t('contacts:create:drap-drop')}</p>
           </div>
           <p className="text-xs leading-5 text-gray-600">
-            PNG, JPG, PDF hasta 5MB
+            {t('contacts:create:png')}
           </p>
         </div>
       </div>

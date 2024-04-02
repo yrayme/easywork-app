@@ -3,23 +3,24 @@ import useAppContext from "@/context/app";
 import { contactDetailTabs } from "@/lib/common";
 import clsx from "clsx";
 import React from "react";
-
-const tabs = [
-  { name: "General", value: 0 },
-  { name: "Pólizas", value: 1 },
-  { name: "Actividades", value: 2 },
-  { name: "Reportes", value: 3 },
-  { name: "Documentos", value: 4 },
-];
+import { useTranslation } from "react-i18next";
 
 export default function AddContactTabs() {
-  const {setContactDetailTab, contactDetailTab} = useAppContext()
+  const { t } = useTranslation();
+  const {setContactDetailTab, contactDetailTab} = useAppContext();
+  const tabs = [
+    { name: t("contacts:create:tabs:general"), value: 0 },
+    { name: t("contacts:create:tabs:policies"), value: 1 },
+    { name: t("contacts:create:tabs:activities"), value: 2 },
+    { name: t("contacts:create:tabs:reports"), value: 3 },
+    { name: t("contacts:create:tabs:documents"), value: 4 },
+  ];
 
   return (
     <div className="bg-white px-4 w-full rounded-lg">
       <div className="sm:hidden">
         <label htmlFor="tabs" className="sr-only">
-          Seleccione una pestaña
+          {t("contacts:create:select-page")}
         </label>
         {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
         <select

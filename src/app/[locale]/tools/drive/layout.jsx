@@ -5,7 +5,7 @@ import DriveHeader from "./components/DriveHeader";
 export default function DriveLayout({ children, table, icons, thumbs }) {
   const { driveView } = useAppContext();
   return (
-    <div className="h-calc flex flex-col flex-grow">
+    <div className="flex flex-col flex-grow">
       <DriveHeader />
       {children}
       {driveView === "table" && table}

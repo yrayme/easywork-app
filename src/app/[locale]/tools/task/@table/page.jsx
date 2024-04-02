@@ -83,8 +83,8 @@ export default function Page() {
 
   return (
     <div className="flow-root">
-      <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div className="overflow-x-auto">
+        <div className="inline-block min-w-full py-2 align-middle">
           <div className="relative overflow-hidden   sm:rounded-lg">
             {selectedTasks.length > 0 && (
               <div className="absolute left-14 top-0 flex h-12 items-center space-x-3 bg-white sm:left-12">
