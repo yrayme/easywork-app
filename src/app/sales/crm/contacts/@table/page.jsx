@@ -25,7 +25,7 @@ export default function Page() {
       const isIndeterminate =
         selectedContacts.length > 0 &&
         selectedContacts.length < AppContacts.length;
-      setChecked(selectedContacts.length === AppContacts.length);
+      setChecked(selectedContacts.length === AppContacts?.length);
       setIndeterminate(isIndeterminate);
       checkbox.current.indeterminate = isIndeterminate;
     }
@@ -65,9 +65,9 @@ export default function Page() {
 
   return (
     <div className="flow-root">
-      <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden   sm:rounded-lg">
+      <div className="overflow-x-auto">
+        <div className="inline-block min-w-full py-2 align-middle">
+          <div className="relative overflow-hidden  sm:rounded-lg">
             {selectedContacts.length > 0 && (
               <div className="absolute left-14 top-0 flex h-12 items-center space-x-3 bg-white sm:left-12">
                 <button
@@ -147,7 +147,7 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {AppContacts.map((contact) => (
+                {AppContacts && AppContacts.map((contact) => (
                   <tr
                     key={contact.id}
                     className={clsx(

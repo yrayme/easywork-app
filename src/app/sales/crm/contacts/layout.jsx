@@ -5,7 +5,7 @@ import ShowContactModal from "./components/show_contact/ShowContactModal";
 
 export default async function ContactLayout({ children, table, modal }) {
   return (
-    <div className="h-calc flex flex-col flex-grow">
+    <div className="flex flex-col w-full">
       <ContactsHeader />
       <Suspense
         fallback={

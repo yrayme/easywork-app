@@ -9,6 +9,7 @@ export default function Page() {
   useEffect(() => {
     async function fetchData() {
       const response = await getContacts();
+      console.log("response", response)
       setContacts(response);
     }
 
