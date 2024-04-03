@@ -7,8 +7,10 @@ import {
   EllipsisHorizontalIcon,
 } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 
 export default function WeekView() {
+  const { t } = useTranslation();
   const container = useRef(null);
   const containerNav = useRef(null);
   const containerOffset = useRef(null);
@@ -42,7 +44,7 @@ export default function WeekView() {
               type="button"
               className="flex flex-col items-center pb-3 pt-2"
             >
-              L{" "}
+              {t('tools:calendar:week-day:l')}{" "}
               <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
                 10
               </span>
@@ -51,7 +53,7 @@ export default function WeekView() {
               type="button"
               className="flex flex-col items-center pb-3 pt-2"
             >
-              M{" "}
+              {t('tools:calendar:week-day:m')}{" "}
               <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
                 11
               </span>
@@ -60,7 +62,7 @@ export default function WeekView() {
               type="button"
               className="flex flex-col items-center pb-3 pt-2"
             >
-              M{" "}
+              {t('tools:calendar:week-day:w')}{" "}
               <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
                 12
               </span>
@@ -69,7 +71,7 @@ export default function WeekView() {
               type="button"
               className="flex flex-col items-center pb-3 pt-2"
             >
-              J{" "}
+              {t('tools:calendar:week-day:j')}{" "}
               <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
                 13
               </span>
@@ -78,7 +80,7 @@ export default function WeekView() {
               type="button"
               className="flex flex-col items-center pb-3 pt-2"
             >
-              V{" "}
+              {t('tools:calendar:week-day:v')}{" "}
               <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
                 14
               </span>
@@ -87,7 +89,7 @@ export default function WeekView() {
               type="button"
               className="flex flex-col items-center pb-3 pt-2"
             >
-              S{" "}
+              {t('tools:calendar:week-day:s')}{" "}
               <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
                 15
               </span>
@@ -96,7 +98,7 @@ export default function WeekView() {
               type="button"
               className="flex flex-col items-center pb-3 pt-2"
             >
-              D{" "}
+              {t('tools:calendar:week-day:d')}{" "}
               <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">
                 16
               </span>
@@ -107,7 +109,7 @@ export default function WeekView() {
             <div className="col-end-1 w-14" />
             <div className="flex items-center justify-center py-3">
               <span>
-                Lun{" "}
+              {t('tools:calendar:week-day:lun')}{" "}
                 <span className="items-center justify-center font-semibold text-gray-900">
                   10
                 </span>
@@ -115,7 +117,7 @@ export default function WeekView() {
             </div>
             <div className="flex items-center justify-center py-3">
               <span>
-                Mar{" "}
+              {t('tools:calendar:week-day:mar')}{" "}
                 <span className="items-center justify-center font-semibold text-gray-900">
                   11
                 </span>
@@ -123,7 +125,7 @@ export default function WeekView() {
             </div>
             <div className="flex items-center justify-center py-3">
               <span className="flex items-baseline">
-                Mie{" "}
+              {t('tools:calendar:week-day:mie')}{" "}
                 <span className="ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
                   12
                 </span>
@@ -131,7 +133,7 @@ export default function WeekView() {
             </div>
             <div className="flex items-center justify-center py-3">
               <span>
-                Jue{" "}
+                {t('tools:calendar:week-day:jue')}{" "}
                 <span className="items-center justify-center font-semibold text-gray-900">
                   13
                 </span>
@@ -139,7 +141,7 @@ export default function WeekView() {
             </div>
             <div className="flex items-center justify-center py-3">
               <span>
-                Vie{" "}
+                {t('tools:calendar:week-day:vie')}{" "}
                 <span className="items-center justify-center font-semibold text-gray-900">
                   14
                 </span>
@@ -147,7 +149,7 @@ export default function WeekView() {
             </div>
             <div className="flex items-center justify-center py-3">
               <span>
-                Sab{" "}
+                {t('tools:calendar:week-day:sab')}{" "}
                 <span className="items-center justify-center font-semibold text-gray-900">
                   15
                 </span>
@@ -155,7 +157,7 @@ export default function WeekView() {
             </div>
             <div className="flex items-center justify-center py-3">
               <span>
-                Dom{" "}
+                {t('tools:calendar:week-day:dom')}{" "}
                 <span className="items-center justify-center font-semibold text-gray-900">
                   16
                 </span>

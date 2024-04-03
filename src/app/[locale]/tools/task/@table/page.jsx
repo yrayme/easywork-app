@@ -2,6 +2,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import React, { useLayoutEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 const tasks = [
   {
     id: 1,
@@ -62,6 +63,7 @@ const tasks = [
 ];
 
 export default function Page() {
+  const { t } = useTranslation();
   const checkbox = useRef();
   const [checked, setChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -91,14 +93,14 @@ export default function Page() {
                 <button
                   type="button"
                   className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
-                >
-                  Editar
+                >                  
+                  {t('common:buttons:edit')}
                 </button>
                 <button
                   type="button"
                   className="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
                 >
-                  Eliminar
+                  {t('common:buttons:delete')}
                 </button>
               </div>
             )}
@@ -118,43 +120,43 @@ export default function Page() {
                     scope="col"
                     className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                   >
-                    Nombre
+                    {t('tools:tasks:table.name')}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 bg-indigo-100/30"
                   >
-                    Actividad
+                    {t('tools:tasks:table.activity')}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Contacto
+                    {t('tools:tasks:table.contact')}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Póliza
+                    {t('tools:tasks:table.policy')}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Fecha Límite
+                    {t('tools:tasks:table.limit-date')}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Creado Por
+                    {t('tools:tasks:table.created-by')}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Persona Responsable
+                    {t('tools:tasks:table.responsible')}
                   </th>
                 </tr>
               </thead>

@@ -10,8 +10,6 @@ import {
   UsersIcon,
 } from "@heroicons/react/20/solid";
 
-export const calendarViews = ["día", "semana", "mes", "programar"];
-
 export const contactSubmenuOptions = [
   "míos",
   "mis elementos",

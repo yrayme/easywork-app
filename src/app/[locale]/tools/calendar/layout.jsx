@@ -1,8 +1,8 @@
 "use client";
 import useAppContext from "@/context/app";
 import CalendarHeader from "./components/CalendarHeader";
-import { calendarViews } from "@/lib/common";
 import Link from "next/link";
+import { useCommon } from "@/hooks/useCommon";
 
 export default function CalendarLayout({
   children,
@@ -13,6 +13,7 @@ export default function CalendarLayout({
   modal,
 }) {
   const { calendarView } = useAppContext();
+  const { calendarViews } = useCommon()
 
   return (
     <>

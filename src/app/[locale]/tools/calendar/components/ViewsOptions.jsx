@@ -1,13 +1,14 @@
 "use client";
 import { RadioGroup } from "@headlessui/react";
 import useAppContext from "@/context/app";
-import { calendarViews } from "@/lib/common";
+import { useCommon } from "@/hooks/useCommon";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function ViewsOptions() {
   const { calendarView, setCalendarView } = useAppContext();
+  const { calendarViews } = useCommon()
 
   return (
     <div>

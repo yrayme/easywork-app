@@ -1,13 +1,16 @@
 {
     "loading": "Loading...",
+    "save": "Successfully saved!",
+    "link": "Anyone with a link can now view this file.",
     "buttons": {
-        "saving" : "Saving...",
-        "cancel" : "Cancel",
-        "save"   : "Save",
-        "uploading" : "Uploading...",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "save": "Save",
+        "uploading": "Uploading...",
         "upload": "Upload",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "close": "Close"
     },
     "menu": {
         "tools": {
@@ -28,8 +31,8 @@
                 "name": "Reports",
                 "activities": "Activities",
                 "history": "History",
-                "agent": "Agent Performance",
-                "reports": "Reports"
+                "reports": "Reports",
+                "agent": "Agent Performance"
             },
             "marketing": {
                 "name": "Marketing"
@@ -75,8 +78,14 @@
     },
     "header": {
         "working": "Working",
-        "profile": "Your profile",
-        "signout": "Sign out",
-        "placeholder-search": "Search for people, documents and more"
+        "profile": "Your Profile",
+        "signout": "Sign Out",
+        "placeholder-search": "Search people, documents, and more"
+    },
+    "file": {
+        "pdf": "Attached PDF:",
+        "attach": "Attach your document in PDF",
+        "convert": "Convert to image",
+        "generated": "Generated Image"
     }
 }

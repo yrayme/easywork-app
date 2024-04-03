@@ -20,14 +20,8 @@ import Dropdown from "@/components/Dropdown";
 import RepeatOptions from "./components/RepeatOptions";
 import SelectMenu from "./components/SelectMenu";
 import SelectEventAttendees from "./components/SelectEventAttendees";
+import { useTranslation } from "react-i18next";
 
-const repeatOptions = [
-  { name: "No repetir", value: 1, label: "" },
-  { name: "Diario", value: 2, label: "día" },
-  { name: "Semanal", value: 3, label: "semana" },
-  { name: "Mensual", value: 4, label: "mes" },
-  { name: "Anual", value: 5, label: "año" },
-];
 
 const repeatValues = [
   ...Array.from({ length: 35 }, (_, index) => ({
@@ -74,6 +68,14 @@ const eventLocalizations = [
 ];
 
 export default function AddEvent() {
+  const repeatOptions = [
+    { name: "No repetir", value: 1, label: "" },
+    { name: "Diario", value: 2, label: t('tools:calendar:day') },
+    { name: "Semanal", value: 3, label: t('tools:calendar:week') },
+    { name: "Mensual", value: 4, label: t('tools:calendar:month') },
+    { name: "Anual", value: 5, label: t('tools:calendar:year') },
+  ];
+  const { t } = useTranslation();
   const [eventImportant, setEventImportant] = useState(false);
   const [timezoneStart, setTimezoneStart] = useState(false);
   const [timezoneEnd, setTimezoneEnd] = useState(false);
@@ -96,7 +98,7 @@ export default function AddEvent() {
           <div className="flex items-start justify-between space-x-3">
             <div className="space-y-1">
               <Dialog.Title className="text-2xl font-medium leading-6 text-gray-900">
-                Nuevo evento
+                {t('tools:calendar:new-event:new')}
               </Dialog.Title>
             </div>
             <div className="flex h-7 items-center">
@@ -106,7 +108,7 @@ export default function AddEvent() {
                 onClick={() => onDismissModal(router, setOpenModal)}
               >
                 <span className="absolute -inset-2.5" />
-                <span className="sr-only">Close panel</span>
+                <span className="sr-only">{t('tools:calendar:new-event:close')}</span>
                 <XMarkIcon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
@@ -121,14 +123,14 @@ export default function AddEvent() {
               htmlFor="event-name"
               className="block text-sm font-medium leading-6 text-gray-900 sm:mt-1.5 sr-only"
             >
-              Nombre del evento
+              {t('tools:calendar:new-event:name')}
             </label>
             <div className="sm:col-span-2 flex-grow rounded-t-xl">
               <input
                 type="text"
                 name="event-name"
                 id="event-name"
-                placeholder="Nombre del evento"
+                placeholder={t('tools:calendar:new-event:name')}
                 className="block w-full border-0 sm:py-4 px-2 sm:px-6 text-gray-900 rounded-xl focus:ring-0 placeholder:text-gray-400 sm:text-xl sm:leading-6"
               />
             </div>
@@ -149,7 +151,7 @@ export default function AddEvent() {
                   htmlFor="important"
                   className="font-light text-gray-900 flex items-center space-x-1.5"
                 >
-                  Este evento es importante
+                  {t('tools:calendar:new-event:important')}
                   <FireIcon
                     className={clsx(
                       eventImportant ? "text-orange-600" : "text-gray-400",
@@ -168,7 +170,7 @@ export default function AddEvent() {
                 htmlFor="project-description"
                 className="block text-sm font-medium leading-6 text-gray-900 my-auto"
               >
-                Hora
+                {t('tools:calendar:new-event:hour')}
               </label>
             </div>
             <div className="sm:col-span-2 flex flex-col">
@@ -178,7 +180,7 @@ export default function AddEvent() {
                     htmlFor="timestart"
                     className="block text-xs font-light leading-6 text-gray-900"
                   >
-                    Fecha y hora del evento
+                    {t('tools:calendar:new-event:date')}
                   </label>
                   <input
                     type={allDay ? "date" : "datetime-local"}
@@ -194,7 +196,7 @@ export default function AddEvent() {
                     htmlFor="timeend"
                     className="block text-xs font-light leading-6 text-gray-900"
                   >
-                    Fecha y hora de finalización del evento
+                    {t('tools:calendar:new-event:date-end')}
                   </label>
                   <input
                     type={allDay ? "date" : "datetime-local"}
@@ -220,7 +222,7 @@ export default function AddEvent() {
                       htmlFor="all-day"
                       className="font-light text-gray-900"
                     >
-                      Todo el día
+                      {t('tools:calendar:new-event:all-day')}
                     </label>
                   </div>
                 </div>
@@ -228,7 +230,7 @@ export default function AddEvent() {
               <div>
                 <Disclosure>
                   <Disclosure.Button className="py-2 text-blue-600 underline decoration-dashed underline-offset-4 hover:decoration-solid">
-                    Zona horaria
+                  {t('tools:calendar:new-event:time-zone')}
                   </Disclosure.Button>
                   <Transition
                     enter="transition-opacity duration-500"
@@ -264,7 +266,7 @@ export default function AddEvent() {
                 htmlFor="project-description"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:mt-1.5"
               >
-                Calendario
+                {t('tools:calendar:name')}
               </label>
             </div>
             <div className="sm:col-span-2 flex">
@@ -283,7 +285,7 @@ export default function AddEvent() {
                 htmlFor="project-description"
                 className="block text-sm font-medium leading-6 text-gray-900 sm:mt-1.5"
               >
-                Repetir
+                {t('tools:calendar:new-event:repeat')}
               </label>
             </div>
             <div className="sm:col-span-2 flex flex-col sm:divide-y sm:divide-gray-200 space-y-4">
@@ -312,7 +314,7 @@ export default function AddEvent() {
           <div className="space-y-2 px-4 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
             <div>
               <h3 className="text-sm font-medium leading-6 text-gray-900">
-                Ubicación
+              {t('tools:calendar:new-event:ubication')}
               </h3>
             </div>
             <div className="sm:col-span-2">
@@ -330,7 +332,7 @@ export default function AddEvent() {
           <div className="space-y-2 px-4 sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
             <div>
               <h3 className="text-sm font-medium leading-6 text-gray-900">
-                Asistentes
+              {t('tools:calendar:new-event:wizards')}
               </h3>
             </div>
             <div className="sm:col-span-2">
@@ -349,13 +351,13 @@ export default function AddEvent() {
                 ) : (
                   <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                 )}
-                <p>Más</p>
+                <p>{t('tools:calendar:new-event:more')}</p>
                 <p className="font-light ml-2">
-                  (<span className="hover:underline">Descripción</span>,{" "}
-                  <span className="hover:underline">Recordatorio</span>,{" "}
-                  <span className="hover:underline">Color del evento</span>,{" "}
-                  <span className="hover:underline">Disponibilidad</span>,{" "}
-                  <span className="hover:underline">Privado</span>)
+                  (<span className="hover:underline">{t('tools:calendar:new-event:description')}</span>,{" "}
+                  <span className="hover:underline">{t('tools:calendar:new-event:reminder')}</span>,{" "}
+                  <span className="hover:underline">{t('tools:calendar:new-event:event-color')}</span>,{" "}
+                  <span className="hover:underline">{t('tools:calendar:new-event:availability')}</span>,{" "}
+                  <span className="hover:underline">{t('tools:calendar:new-event:private')}</span>)
                 </p>
               </Disclosure.Button>
               <Transition
@@ -379,14 +381,14 @@ export default function AddEvent() {
           type="submit"
           className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
         >
-          Guardar
+          {t('common:buttons:save')}
         </button>
         <button
           type="button"
           className="ml-4 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
           onClick={() => setOpen(false)}
         >
-          Cancelar
+          {t('common:buttons:cancel')}
         </button>
        
       </div>

@@ -1,5 +1,7 @@
 {
     "loading": "Cargando...",
+    "save": "¡Salvado con éxito!",
+    "link": "Cualquier persona con un enlace puede ver ahora este archivo.",
     "buttons": {
         "saving" : "Guardando...",
         "cancel" : "Cancelar",
@@ -7,7 +9,8 @@
         "uploading" : "Subiendo...",
         "upload": "Subir",
         "edit": "Editar",
-        "delete": "Eliminar"
+        "delete": "Eliminar",
+        "close": "Cerrar"
     },
     "menu": {
         "tools": {
@@ -78,5 +81,11 @@
         "profile": "Tu perfil",
         "signout": "Cerrar sesión",
         "placeholder-search": "Buscar personas, documentos y más"
+    },
+    "file": {
+        "pdf": "PDF adjunto:",
+        "attach": "Adjunte su documento en PDF",
+        "convert" : "Convertir a imagen",
+        "generated" : "Imagen generada"
     }
 }

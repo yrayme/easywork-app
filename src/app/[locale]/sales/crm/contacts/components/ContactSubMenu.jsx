@@ -1,6 +1,4 @@
 "use client";
-import { RadioGroup } from "@headlessui/react";
-import { calendarViews, contactSubmenuOptions } from "@/lib/common";
 import { useTranslation } from "react-i18next";
 
 function classNames(...classes) {

@@ -4,8 +4,10 @@ import React from "react";
 import CreateTaskButton from "./components/CreateTaskButton";
 import { Cog8ToothIcon, TrashIcon } from "@heroicons/react/20/solid";
 import TaskSubMenu from "./components/TaskSubMenu";
+import { useTranslation } from "react-i18next";
 
 export default function TaskLayout({ children, table }) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col flex-grow">
       <ToolHeader

@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import { useTranslation } from "react-i18next";
 
 const days = [
   { date: "2021-12-27" },
@@ -67,6 +68,7 @@ function classNames(...classes) {
 }
 
 export default function Page() {
+  const { t } = useTranslation();
   return (
     <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
       <div className="md:pr-14">
@@ -78,25 +80,25 @@ export default function Page() {
             type="button"
             className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
           >
-            <span className="sr-only">Previous month</span>
+            <span className="sr-only">{t('tools:calendar:previous-month')}</span>
             <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
           </button>
           <button
             type="button"
             className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
           >
-            <span className="sr-only">Next month</span>
+            <span className="sr-only">{t('tools:calendar:next-month')}</span>
             <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
         <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
-          <div>M</div>
-          <div>T</div>
-          <div>W</div>
-          <div>T</div>
-          <div>F</div>
-          <div>S</div>
-          <div>S</div>
+          <div>{t('tools:calendar:week-day:l')}</div>
+          <div>{t('tools:calendar:week-day:m')}</div>
+          <div>{t('tools:calendar:week-day:w')}</div>
+          <div>{t('tools:calendar:week-day:j')}</div>
+          <div>{t('tools:calendar:week-day:v')}</div>
+          <div>{t('tools:calendar:week-day:s')}</div>
+          <div>{t('tools:calendar:week-day:d')}</div>
         </div>
         <div className="mt-2 grid grid-cols-7 text-sm">
           {days.map((day, dayIdx) => (
@@ -163,7 +165,7 @@ export default function Page() {
               >
                 <div>
                   <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-gray-500 hover:text-gray-600">
-                    <span className="sr-only">Open options</span>
+                    <span className="sr-only">{t('tools:tasks:span')}</span>
                     <EllipsisVerticalIcon
                       className="h-6 w-6"
                       aria-hidden="true"
@@ -193,7 +195,7 @@ export default function Page() {
                               "block px-4 py-2 text-sm"
                             )}
                           >
-                            Edit
+                            {t('common:buttons:edit')}
                           </a>
                         )}
                       </Menu.Item>
@@ -208,7 +210,7 @@ export default function Page() {
                               "block px-4 py-2 text-sm"
                             )}
                           >
-                            Cancel
+                            {t('common:buttons:cancel')}
                           </a>
                         )}
                       </Menu.Item>

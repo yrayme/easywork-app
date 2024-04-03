@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 const days = [
   { date: "2024-01-01", isCurrentMonth: true },
@@ -42,6 +43,7 @@ const days = [
 ];
 
 export default function DayView() {
+  const { t } = useTranslation();
   const container = useRef(null);
   const containerNav = useRef(null);
   const containerOffset = useRef(null);
@@ -58,7 +60,7 @@ export default function DayView() {
   }, []);
 
   return (
-    <div className="isolate flex flex-auto overflow-auto bg-slate-100 h-cal">
+    <div className="isolate flex flex-auto overflow-auto bg-slate-100">
       <div
         ref={container}
         className="flex flex-auto flex-col overflow-auto bg-white"
@@ -358,7 +360,7 @@ export default function DayView() {
             type="button"
             className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
           >
-            <span className="sr-only">Previous month</span>
+            <span className="sr-only">{t('tools:calendar:previous-month')}</span>
             <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
           </button>
           <div className="flex-auto text-sm font-semibold">Enero 2024</div>
@@ -366,7 +368,7 @@ export default function DayView() {
             type="button"
             className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
           >
-            <span className="sr-only">Next month</span>
+            <span className="sr-only">{t('tools:calendar:next-month')}</span>
             <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>

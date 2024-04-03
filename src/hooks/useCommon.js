@@ -6,9 +6,7 @@ import {
 } from "react-i18next";
 
 export const useSidebar = () => {
-    const {
-        t
-    } = useTranslation();
+    const { t } = useTranslation();
 
     const sidebarNavigation = [{
             name: t("common:menu:tools:name"),
@@ -205,4 +203,10 @@ export const useSidebar = () => {
     return {
         sidebarNavigation
     }
+}
+
+export const useCommon = () => {
+    const { t } = useTranslation();
+    const calendarViews = [t('tools:calendar:day'), t('tools:calendar:week'), t('tools:calendar:month'), t('tools:calendar:program')];
+    return { calendarViews}
 }

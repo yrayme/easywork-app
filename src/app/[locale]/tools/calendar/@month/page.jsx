@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 const days = [
   { date: "2021-12-27", events: [] },
@@ -132,30 +133,31 @@ const days = [
 const selectedDay = days.find((day) => day.isSelected);
 
 export default function MonthView() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="shadow ring-1 ring-black ring-opacity-5 lg:flex lg:flex-auto lg:flex-col">
         <div className="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none">
           <div className="bg-white py-2">
-            L<span className="sr-only sm:not-sr-only">unes</span>
+            {t('tools:calendar:week-day:l')}<span className="sr-only sm:not-sr-only">{t('tools:calendar:week-day:unes')}</span>
           </div>
           <div className="bg-white py-2">
-            M<span className="sr-only sm:not-sr-only">artes</span>
+            {t('tools:calendar:week-day:m')}<span className="sr-only sm:not-sr-only">{t('tools:calendar:week-day:artes')}</span>
           </div>
           <div className="bg-white py-2">
-            M<span className="sr-only sm:not-sr-only">iércoles</span>
+            {t('tools:calendar:week-day:w')}<span className="sr-only sm:not-sr-only">{t('tools:calendar:week-day:iercoles')}</span>
           </div>
           <div className="bg-white py-2">
-            J<span className="sr-only sm:not-sr-only">ueves</span>
+            {t('tools:calendar:week-day:j')}<span className="sr-only sm:not-sr-only">{t('tools:calendar:week-day:ueves')}</span>
           </div>
           <div className="bg-white py-2">
-            V<span className="sr-only sm:not-sr-only">iernes</span>
+            {t('tools:calendar:week-day:v')}<span className="sr-only sm:not-sr-only">{t('tools:calendar:week-day:iernes')}</span>
           </div>
           <div className="bg-white py-2">
-            S<span className="sr-only sm:not-sr-only">ábado</span>
+            {t('tools:calendar:week-day:s')}<span className="sr-only sm:not-sr-only">{t('tools:calendar:week-day:abado')}</span>
           </div>
           <div className="bg-white py-2">
-            D<span className="sr-only sm:not-sr-only">omingo</span>
+            {t('tools:calendar:week-day:d')}<span className="sr-only sm:not-sr-only">{t('tools:calendar:week-day:omingo')}</span>
           </div>
         </div>
         <div className="flex bg-gray-200 text-xs leading-6 text-gray-700 lg:flex-auto">
