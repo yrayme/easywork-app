@@ -21,7 +21,7 @@ module.exports = {
       },
       colors: {
         // light mode
-        primary: "#2e2968",
+        primary: "#241F61",
         "easy": {
           50: "#EEEDF8",
           100: "#DCDAF1",
@@ -35,7 +35,6 @@ module.exports = {
           900: "#0F0D21",
           950: "#080712",
           1000: "#6961C0",
-          dark: "#241F61"
         },
         "gray": {
           "dark": "#959595",

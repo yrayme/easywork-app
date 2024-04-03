@@ -86,13 +86,13 @@ export default function SearchBox() {
       </label>
       <input
         id="search-field"
-        className=" w-full h-8 my-auto rounded-xl border-0 py-0 pl-2 pr-8 text-black placeholder:text-easy-dark focus:ring-0 sm:text-sm bg-gray-200 font-medium"
+        className=" w-full h-8 my-auto rounded-xl border-0 py-0 pl-2 pr-8 text-black placeholder:text-primary focus:ring-0 sm:text-sm bg-gray-200 font-medium"
         placeholder={t('common:header:placeholder-search')}
         type="search"
         name="search"
       />
       <MagnifyingGlassIcon
-        className="pointer-events-none absolute inset-y-0 right-2 h-full w-5 text-easy-dark"
+        className="pointer-events-none absolute inset-y-0 right-2 h-full w-5 text-primary"
         aria-hidden="true"
       />
 

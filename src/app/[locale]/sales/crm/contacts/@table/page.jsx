@@ -106,7 +106,7 @@ export default function Page() {
                     <div className="flex justify-center items-center gap-2">
                       {t('contacts:table:contact')}
                       <div>
-                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                        <ChevronDownIcon className="h-6 w-6 text-primary"/>
                       </div>
                     </div>
                   </th>
@@ -117,7 +117,7 @@ export default function Page() {
                     <div className="flex justify-center items-center gap-2">
                       {t('contacts:table:birthday')}
                       <div>
-                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                        <ChevronDownIcon className="h-6 w-6 text-primary"/>
                       </div>
                     </div>
                   </th>
@@ -128,7 +128,7 @@ export default function Page() {
                     <div className="flex justify-center items-center gap-2">
                       {t('contacts:table:responsible')}
                       <div>
-                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                        <ChevronDownIcon className="h-6 w-6 text-primary"/>
                       </div>
                     </div>
                   </th>
@@ -139,7 +139,7 @@ export default function Page() {
                     <div className="flex justify-center items-center gap-2">
                       {t('contacts:table:email')}
                       <div>
-                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                        <ChevronDownIcon className="h-6 w-6 text-primary"/>
                       </div>
                     </div>
                   </th>
@@ -150,7 +150,7 @@ export default function Page() {
                     <div className="flex justify-center items-center gap-2">
                       {t('contacts:table:phone')}
                       <div>
-                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                        <ChevronDownIcon className="h-6 w-6 text-primary"/>
                       </div>
                     </div>
                   </th>
@@ -161,7 +161,7 @@ export default function Page() {
                     <div className="flex justify-center items-center gap-2">
                       {t('contacts:table:created')}
                       <div>
-                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                        <ChevronDownIcon className="h-6 w-6 text-primary"/>
                       </div>
                     </div>
                   </th>
@@ -172,7 +172,7 @@ export default function Page() {
                     <div className="flex justify-center items-center gap-2">
                       {t('contacts:table:origin')}
                       <div>
-                        <ChevronDownIcon className="h-6 w-6 text-easy-dark"/>
+                        <ChevronDownIcon className="h-6 w-6 text-primary"/>
                       </div>
                     </div>
                   </th>
