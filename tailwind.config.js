@@ -35,6 +35,10 @@ module.exports = {
           900: "#0F0D21",
           950: "#080712"
         },
+        easywork: {
+          main: "#262261",
+          mainhover: "#141052"
+        },
         tremor: {
           brand: {
             faint: colors.blue[50],
